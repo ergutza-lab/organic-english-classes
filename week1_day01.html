@@ -18,11 +18,10 @@
     .slide {
       display: none;
       min-height: 100vh;
-      height: 100vh;
       padding: 0;
       position: relative;
-      overflow: visible;
       animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
       background-image: url('https://raw.githubusercontent.com/ergutza-lab/organic-english-classes/main/imagenes/fondoclases.webp');
       background-size: 100% 100%;
       background-position: center;
@@ -38,7 +37,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
     @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     
     .slide-header {
       padding: 25px 45px;
@@ -58,27 +56,6 @@
       font-size: 1.4rem;
       box-shadow: 0 4px 15px rgba(249,115,22,0.3);
     }
-    .breakout-badge {
-      background: rgba(74,222,128,0.2);
-      border: 2px solid #4ade80;
-      padding: 12px 24px;
-      border-radius: 30px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      color: #4ade80;
-      font-size: 1.1rem;
-    }
-    .breakout-timer {
-      background: linear-gradient(135deg, #4ade80, #22c55e);
-      color: #0f172a;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-weight: 800;
-      font-size: 1.3rem;
-      box-shadow: 0 4px 20px rgba(74,222,128,0.3);
-    }
     
     .slide-content {
       flex: 1;
@@ -86,9 +63,8 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: center;
-      padding: 30px 60px 80px;
+      padding: 30px 60px 100px;
       text-align: center;
-      min-height: 100vh;
     }
     
     h1 { 
@@ -109,8 +85,9 @@
     
     .title-es {
       font-size: 1.3rem;
-      color: #94a3b8;
+      color: #fbbf24;
       font-weight: 400;
+      margin-bottom: 20px;
     }
     
     .phrase-card {
@@ -118,7 +95,6 @@
       align-items: center;
       gap: 20px;
       background: linear-gradient(135deg, #166534, #15803d);
-      backdrop-filter: blur(10px);
       padding: 20px 28px;
       margin: 8px 0;
       border-radius: 16px;
@@ -131,7 +107,6 @@
       transform: scale(1.03);
       background: linear-gradient(135deg, #15803d, #16a34a);
       box-shadow: 0 15px 40px rgba(34,197,94,0.4);
-      border-color: #4ade80;
     }
     .phrase-card .label { 
       background: linear-gradient(135deg, #f97316, #ea580c); 
@@ -166,39 +141,7 @@
       max-width: 780px;
       box-shadow: 0 10px 40px rgba(249,115,22,0.15);
     }
-    
-    .person-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #f97316;
-      box-shadow: 0 8px 25px rgba(249,115,22,0.4);
-      transition: transform 0.3s;
-    }
-    .person-img:hover { transform: scale(1.1); }
-    
-    .avatar {
-      width: 85px;
-      height: 85px;
-      border-radius: 50%;
-      border: 3px solid #f97316;
-      object-fit: cover;
-      transition: transform 0.3s;
-    }
-    .avatar:hover { transform: scale(1.15); }
-    
-    .dialogue {
-      background: rgba(0,0,0,0.35);
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 650px;
-      text-align: left;
-    }
-    .dialogue p { font-size: 1.35rem; margin: 8px 0; color: #fff; }
-    .dialogue strong { color: #fbbf24; }
-    .dialogue-es { font-size: 0.95rem; color: #94a3b8; }
-    
+
     .step { 
       background: linear-gradient(135deg, #b45309, #d97706);
       padding: 18px; 
@@ -206,12 +149,12 @@
       border-radius: 14px; 
       border-left: 5px solid #fbbf24;
       transition: all 0.3s;
+      text-align: left;
     }
     .step:hover { 
       transform: translateX(10px) scale(1.02); 
       background: linear-gradient(135deg, #d97706, #f59e0b); 
       box-shadow: 0 8px 25px rgba(245,158,11,0.4);
-      border-left-color: #fcd34d;
     }
     .step-num { 
       display: inline-block; 
@@ -226,7 +169,8 @@
       margin-right: 12px;
     }
     
-.btn-nav {
+    /* ✅ BOTONES FIJOS - corregidos */
+    .btn-nav {
       position: fixed;
       bottom: 25px;
       background: linear-gradient(135deg, #f97316, #ea580c);
@@ -238,10 +182,11 @@
       font-weight: 700;
       cursor: pointer;
       box-shadow: 0 8px 25px rgba(249,115,22,0.4);
-      z-index: 1000;
+      z-index: 9999;
+      transition: transform 0.2s;
     }
     .btn-nav:hover { transform: scale(1.05) translateY(-3px); }
-    .btn-prev { left: 25px; background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .btn-prev { left: 25px; background: linear-gradient(135deg, #6366f1, #4f46e5); box-shadow: 0 8px 25px rgba(99,102,241,0.4); }
     .btn-next { right: 25px; }
     
     .progress {
@@ -250,25 +195,22 @@
       left: 0;
       height: 5px;
       background: linear-gradient(90deg, #f97316, #fbbf24, #4ade80);
-      z-index: 100;
+      z-index: 9999;
+      transition: width 0.3s ease;
     }
     
     .highlight { color: #4ade80; font-weight: 600; }
     .orange { color: #f97316; font-weight: 600; }
     .yellow { color: #fbbf24; font-weight: 600; }
-    
-    .avatar-group { display: flex; justify-content: center; gap: 20px; margin: 25px 0; }
-    
-.logo-img {
+
+    .logo-img {
       width: 300px;
       animation: float 4s ease-in-out infinite;
     }
     .logo-img-sm {
       width: 150px;
       animation: float 4s ease-in-out infinite;
-    }
-    .cover-logo {
-      margin-bottom: 5px;
+      margin-bottom: 20px;
     }
     .greeting-photo {
       width: 280px;
@@ -276,46 +218,30 @@
       border-radius: 50%;
       object-fit: cover;
       object-position: center;
-margin-top: 40px;
+      margin-top: 40px;
       border: 5px solid rgba(255,255,255,0.4);
       box-shadow: 0 10px 40px rgba(0,0,0,0.4);
     }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin: 20px 0;
+    .blue-card {
+      background: linear-gradient(135deg, #1e3a5f, #2d5a87);
+      border: 2px solid #3b82f6;
+      border-radius: 16px;
+      padding: 15px 20px;
+      transition: all 0.3s;
+      cursor: pointer;
     }
-    .photo-grid img {
-      width: 100%;
-      height: 80px;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 2px solid rgba(255,255,255,0.2);
-      transition: transform 0.3s;
-    }
-    .photo-grid img:hover { transform: scale(1.05); }
-
-    .big-photo {
-      width: 280px;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 20px;
-      border: 3px solid rgba(255,255,255,0.2);
-      margin: 15px;
+    .blue-card:hover {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      transform: scale(1.02);
+      box-shadow: 0 15px 40px rgba(59,130,246,0.4);
     }
 
-    .subtitle-text {
-      color: #94a3b8;
-      font-size: 1.1rem;
-      margin-bottom: 20px;
-    }
-    
     @media (max-width: 768px) {
       h1 { font-size: 2.5rem; }
       h2 { font-size: 1.8rem; }
       .two-col { grid-template-columns: 1fr; }
+      .slide-content { padding: 20px 20px 100px; }
     }
   </style>
 </head>
@@ -325,10 +251,10 @@ margin-top: 40px;
   <!-- Slide 1: Portada -->
   <div class="slide active slide-cover">
     <div class="slide-header">
-      <div class="slide-num">1 / 10</div>
+      <div class="slide-num">1/11</div>
     </div>
-    <div class="slide-content" style="padding-top: -20px; justify-content: flex-start; padding-bottom: 20px;">
-      <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english-classes/main/imagenes/logoblanco2.png" class="logo-img cover-logo" style="margin-bottom: 0px; margin-top: -50px;">
+    <div class="slide-content" style="justify-content: flex-start; padding-top: 10px;">
+      <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english-classes/main/imagenes/logoblanco2.png" class="logo-img" style="margin-bottom: 0; margin-top: -20px;">
       <h1 style="font-size: 4.5rem; margin-bottom: 10px;">NICE TO MEET YOU</h1>
       <p style="font-size: 2rem; color: #cbd5e1; margin-bottom: 8px;">Week 1 - Day 1</p>
       <p style="font-size: 1.5rem; color: #94a3b8;">Clase 1 - Semana 1</p>
@@ -339,42 +265,40 @@ margin-top: 40px;
   <!-- Slide 2: Objetivos -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">2</div>
+      <div class="slide-num">2/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 5rem; margin-bottom: 5px; margin-top: -200px; color: #1e3a5f;">Today's Goals</h2>
-      <p class="title-es" style="font-size: 1.4rem; color: #374151; margin-bottom: 30px;">Objetivos de hoy</p>
+      <h2 style="font-size: 5rem; margin-bottom: 5px; color: #ffffff;">Today's Goals</h2>
+      <p class="title-es">Objetivos de hoy</p>
       
       <div style="display: flex; justify-content: center; align-items: center; gap: 40px; width: 100%; max-width: 1100px;">
         <div style="text-align: left; flex: 1;">
           <div class="phrase-card" style="justify-content: center; margin-bottom: 25px; padding: 25px 40px;">
             <span class="label" style="background: linear-gradient(135deg, #4ade80, #22c55e);">Goal</span>
             <div style="text-align: center;">
-              <span class="text" style="font-size: 1.6rem; white-space: nowrap;">Introduce yourself & meet classmates</span>
-              <span class="phrase-es" style="display: block; font-size: 0.95rem; color: #cbd5e1; margin-top: 6px;">Preséntate y conoce a tus compañeros</span>
+              <span class="text" style="font-size: 1.4rem;">Introduce yourself & meet classmates</span>
+              <span class="phrase-es" style="color: #cbd5e1;">Preséntate y conoce a tus compañeros</span>
             </div>
           </div>
           
-          <div style="margin-top: 20px;">
-            <p style="color: #14532d; font-size: 1.6rem; margin-bottom: 15px; font-weight: 700;">You will be able to:</p>
-            <p style="font-size: 1rem; color: #6b7280; margin-bottom: 15px; margin-top: -10px;">(Serás capaz de:)</p>
-            <div class="step" style="font-size: 1.4rem; display: block;">
-              <span class="step-num">1</span> Say your name in English
-              <span style="display: block; font-size: 1rem; color: #fef3c7; margin-top: 5px; margin-left: 28px;">Decir tu nombre en inglés</span>
-            </div>
-            <div class="step" style="font-size: 1.4rem; display: block;">
-              <span class="step-num">2</span> Ask someone's name
-              <span style="display: block; font-size: 1rem; color: #fef3c7; margin-top: 5px; margin-left: 28px;">Preguntar el nombre de alguien</span>
-            </div>
-            <div class="step" style="font-size: 1.4rem; display: block;">
-              <span class="step-num">3</span> Use introduction phrases
-              <span style="display: block; font-size: 1rem; color: #fef3c7; margin-top: 5px; margin-left: 28px;">Usar frases de presentación</span>
-            </div>
+          <p style="color: #fbbf24; font-size: 1.4rem; margin-bottom: 8px; font-weight: 700;">You will be able to:</p>
+          <p style="font-size: 1rem; color: #6b7280; margin-bottom: 15px;">(Serás capaz de:)</p>
+          <div class="step" style="font-size: 1.3rem;">
+            <span class="step-num">1</span> Say your name in English
+            <span style="display: block; font-size: 1rem; color: #fef3c7; margin-top: 5px; margin-left: 48px;">Decir tu nombre en inglés</span>
+          </div>
+          <div class="step" style="font-size: 1.3rem;">
+            <span class="step-num">2</span> Ask someone's name
+            <span style="display: block; font-size: 1rem; color: #fef3c7; margin-top: 5px; margin-left: 48px;">Preguntar el nombre de alguien</span>
+          </div>
+          <div class="step" style="font-size: 1.3rem;">
+            <span class="step-num">3</span> Use introduction phrases
+            <span style="display: block; font-size: 1rem; color: #fef3c7; margin-top: 5px; margin-left: 48px;">Usar frases de presentación</span>
           </div>
         </div>
         
         <div style="flex: 1; text-align: right;">
-          <img src="https://plus.unsplash.com/premium_photo-1682787495095-134403f5196d?q=80&w=800&h=600&auto=format&fit=crop" alt="Goals" style="width: 100%; max-width: 550px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);">
+          <img src="https://plus.unsplash.com/premium_photo-1682787495095-134403f5196d?q=80&w=800&h=600&auto=format&fit=crop" alt="Goals" style="width: 100%; max-width: 500px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);">
         </div>
       </div>
     </div>
@@ -383,33 +307,32 @@ margin-top: 40px;
   <!-- Slide 3: Warm Up -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">3</div>
+      <div class="slide-num">3/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 4.5rem; color: #1e3a5f; margin-bottom: 5px; margin-top: -200px;">Let's do brain gym!</h2>
-      <p class="title-es" style="font-size: 1.4rem; color: #374151; margin-bottom: 30px;">(¡Hagamos calentamiento cerebral!)</p>
+      <h2 style="font-size: 4.5rem; color: #ffffff; margin-bottom: 5px;">Let's do brain gym!</h2>
+      <p class="title-es">(¡Hagamos calentamiento cerebral!)</p>
       
       <div style="display: flex; justify-content: center; align-items: flex-start; gap: 50px; width: 100%; max-width: 1100px;">
-        <div style="flex: 1; text-align: center; position: relative; top: 80px;">
+        <div style="flex: 1; text-align: center;">
           <img src="https://plus.unsplash.com/premium_photo-1731439886498-d09d6472dfb3?q=80&w=800&h=600&auto=format&fit=crop" alt="Brain Gym" style="width: 100%; max-width: 480px; border-radius: 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-          <div style="position: absolute; top: 10px; left: 50%; transform: translateX(-50%); background: red; color: white; padding: 5px 15px; border-radius: 5px; font-weight: bold;">top: 80px</div>
         </div>
         
         <div style="flex: 1; text-align: left;">
-          <p style="font-size: 2rem; color: #1e3a5f; margin-bottom: 5px; font-weight: 600;">Repite conmigo</p>
+          <p style="font-size: 2rem; color: #ffffff; margin-bottom: 5px; font-weight: 600;">Repite conmigo</p>
           <p style="font-size: 1rem; color: #6b7280; margin-bottom: 25px;">(Repeat and move)</p>
           
           <div style="display: flex; flex-direction: column; gap: 20px;">
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 20px 28px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 15px 40px rgba(59,130,246,0.4)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)'; this.style.boxShadow='none';">
-              <span class="text" style="font-size: 1.8rem; display: block; color: #fbbf24;">Hi!</span>
+            <div class="blue-card">
+              <span style="font-size: 1.8rem; display: block; color: #fbbf24;">Hi!</span>
               <span style="display: block; font-size: 0.95rem; color: #cbd5e1; margin-top: 5px;">¡Hola!</span>
             </div>
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 20px 28px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 15px 40px rgba(59,130,246,0.4)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)'; this.style.boxShadow='none';">
-              <span class="text" style="font-size: 1.8rem; display: block; color: #fbbf24;">My name is ___</span>
+            <div class="blue-card">
+              <span style="font-size: 1.8rem; display: block; color: #fbbf24;">My name is ___</span>
               <span style="display: block; font-size: 0.95rem; color: #cbd5e1; margin-top: 5px;">Me llamo ___</span>
             </div>
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 20px 28px; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.03)'; this.style.boxShadow='0 15px 40px rgba(59,130,246,0.4)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)'; this.style.boxShadow='none';">
-              <span class="text" style="font-size: 1.8rem; display: block; color: #fbbf24;">What's your name?</span>
+            <div class="blue-card">
+              <span style="font-size: 1.8rem; display: block; color: #fbbf24;">What's your name?</span>
               <span style="display: block; font-size: 0.95rem; color: #cbd5e1; margin-top: 5px;">¿Cómo te llamas?</span>
             </div>
           </div>
@@ -421,48 +344,50 @@ margin-top: 40px;
     </div>
   </div>
 
-  <!-- Slide 4: Video + Phrases -->
+  <!-- Slide 4: Watch & Listen -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">4</div>
+      <div class="slide-num">4/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 4.5rem; color: #1e3a5f; margin-bottom: 5px; margin-top: -200px;">Watch & Listen</h2>
-      <p class="title-es" style="font-size: 1.4rem; color: #374151; margin-bottom: 20px;">(Observa y aprende)</p>
+      <h2 style="font-size: 4.5rem; color: #ffffff; margin-bottom: 5px;">Watch & Listen</h2>
+      <p class="title-es">(Observa y aprende)</p>
       
-      <div style="display: flex; justify-content: center; gap: 50px; width: 100%; max-width: 1100px; margin-bottom: 30px;">
-        <div style="flex: 1; text-align: center; position: relative; top: 230px; transform: scale(1.3);">
-          <iframe style="width:100%; height:280px; border-radius:20px; border:3px solid rgba(249,115,22,0.5);" 
+      <div style="display: flex; justify-content: center; align-items: flex-start; gap: 40px; width: 100%; max-width: 1150px;">
+        <!-- Video -->
+        <div style="flex: 1.2; text-align: center;">
+          <iframe style="width:100%; height:360px; border-radius:20px; border:3px solid rgba(249,115,22,0.5);" 
             src="https://www.youtube.com/embed/RLs9lIy5WT0?controls=1" 
             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
             allowfullscreen>
           </iframe>
         </div>
         
+        <!-- Frases -->
         <div style="flex: 1; text-align: center;">
-          <h3 style="font-size: 1.8rem; color: #1e3a5f; margin-bottom: 15px;">Useful Phrases</h3>
-          <p style="font-size: 1rem; color: #6b7280; margin-bottom: 15px;">(Frases útiles)</p>
+          <h3 style="font-size: 1.6rem; color: #ffffff; margin-bottom: 6px;">Useful Phrases</h3>
+          <p style="font-size: 0.95rem; color: #6b7280; margin-bottom: 12px;">(Frases útiles)</p>
           
-          <div style="display: flex; flex-direction: column; gap: 12px; max-width: 350px; margin: 0 auto;">
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 15px 20px; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.02)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)';">
-              <span style="font-size: 1.4rem; display: block; color: #fbbf24;">Hi! / Hello!</span>
-              <span style="font-size: 0.9rem; color: #cbd5e1;">Hola</span>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="blue-card">
+              <span style="font-size: 1.3rem; display: block; color: #fbbf24;">Hi! / Hello!</span>
+              <span style="font-size: 0.85rem; color: #cbd5e1;">Hola</span>
             </div>
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 15px 20px; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.02)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)';">
-              <span style="font-size: 1.4rem; display: block; color: #fbbf24;">I'm ______</span>
-              <span style="font-size: 0.9rem; color: #cbd5e1;">Me llamo</span>
+            <div class="blue-card">
+              <span style="font-size: 1.3rem; display: block; color: #fbbf24;">I'm ______</span>
+              <span style="font-size: 0.85rem; color: #cbd5e1;">Me llamo</span>
             </div>
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 15px 20px; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.02)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)';">
-              <span style="font-size: 1.4rem; display: block; color: #fbbf24;">What's your name?</span>
-              <span style="font-size: 0.9rem; color: #cbd5e1;">¿Cómo te llamas?</span>
+            <div class="blue-card">
+              <span style="font-size: 1.3rem; display: block; color: #fbbf24;">What's your name?</span>
+              <span style="font-size: 0.85rem; color: #cbd5e1;">¿Cómo te llamas?</span>
             </div>
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 15px 20px; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.02)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)';">
-              <span style="font-size: 1.4rem; display: block; color: #fbbf24;">Nice to meet you!</span>
-              <span style="font-size: 0.9rem; color: #cbd5e1;">¡Mucho gusto!</span>
+            <div class="blue-card">
+              <span style="font-size: 1.3rem; display: block; color: #fbbf24;">Nice to meet you!</span>
+              <span style="font-size: 0.85rem; color: #cbd5e1;">¡Mucho gusto!</span>
             </div>
-            <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 16px; padding: 15px 20px; transition: all 0.3s;" onmouseover="this.style.background='linear-gradient(135deg, #2563eb, #3b82f6)'; this.style.transform='scale(1.02)';" onmouseout="this.style.background='linear-gradient(135deg, #1e3a5f, #2d5a87)'; this.style.transform='scale(1)';">
-              <span style="font-size: 1.4rem; display: block; color: #fbbf24;">Nice to meet you too!</span>
-              <span style="font-size: 0.9rem; color: #cbd5e1;">¡Mucho gusto a mí también!</span>
+            <div class="blue-card">
+              <span style="font-size: 1.3rem; display: block; color: #fbbf24;">Nice to meet you too!</span>
+              <span style="font-size: 0.85rem; color: #cbd5e1;">¡Mucho gusto a mí también!</span>
             </div>
           </div>
         </div>
@@ -470,15 +395,14 @@ margin-top: 40px;
     </div>
   </div>
 
-  <!-- Slide 5: Comprehension Questions -->
+  <!-- Slide 5: Comprehension -->
   <div class="slide">
     <div class="slide-header">
-      <div></div>
-      <div class="slide-num">5</div>
+      <div class="slide-num">5/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 4.5rem; color: #1e3a5f; margin-bottom: 5px; margin-top: -200px;">Comprehension</h2>
-      <p class="title-es" style="font-size: 1.4rem; color: #374151; margin-bottom: 20px;">(Comprensión)</p>
+      <h2 style="font-size: 4.5rem; color: #ffffff; margin-bottom: 5px;">Comprehension</h2>
+      <p class="title-es">(Comprensión)</p>
       
       <div style="display: flex; justify-content: center; gap: 40px; width: 100%; max-width: 1000px; align-items: flex-start;">
         <div style="flex: 1; text-align: center;">
@@ -486,37 +410,37 @@ margin-top: 40px;
         </div>
         
         <div style="flex: 1.2; display: flex; flex-direction: column; gap: 12px;">
-        
-        <!-- Question 1 -->
-        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 14px; padding: 15px;">
-          <p style="color: #fbbf24; font-size: 1.3rem; margin-bottom: 3px;"><span style="background: #fbbf24; color: #1e3a5f; padding: 2px 8px; border-radius: 6px; margin-right: 8px; font-weight: bold;">1</span>What words do you use to greet?</p>
-          <p style="color: #9ca3af; font-size: 0.85rem; opacity: 0.7;">¿Qué palabras usas para saludar?</p>
-          <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
-            <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">A) Nice to meet you!</span>
-            <span onclick="this.style.background='linear-gradient(135deg, #16a34a, #15803d)'; this.style.boxShadow='0 0 15px rgba(22,163,74,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">B) Hi! / Hello!</span>
-            <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">C) I'm ______</span>
+          <!-- Question 1 -->
+          <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 14px; padding: 15px;">
+            <p style="color: #fbbf24; font-size: 1.2rem; margin-bottom: 3px;"><span style="background: #fbbf24; color: #0f172a; padding: 2px 8px; border-radius: 6px; margin-right: 8px; font-weight: bold;">1</span>What words do you use to greet?</p>
+            <p style="color: #9ca3af; font-size: 0.85rem;">¿Qué palabras usas para saludar?</p>
+            <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+              <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">A) Nice to meet you!</span>
+              <span onclick="this.style.background='linear-gradient(135deg, #16a34a, #15803d)'; this.style.boxShadow='0 0 15px rgba(22,163,74,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">B) Hi! / Hello!</span>
+              <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">C) I'm ______</span>
+            </div>
           </div>
-        </div>
-        
-        <!-- Question 2 -->
-        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 14px; padding: 15px;">
-          <p style="color: #fbbf24; font-size: 1.3rem; margin-bottom: 3px;"><span style="background: #fbbf24; color: #1e3a5f; padding: 2px 8px; border-radius: 6px; margin-right: 8px; font-weight: bold;">2</span>What words do you use to say your name?</p>
-          <p style="color: #9ca3af; font-size: 0.85rem; opacity: 0.7;">¿Qué palabras usas para decir tu nombre?</p>
-          <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
-            <span onclick="this.style.background='linear-gradient(135deg, #16a34a, #15803d)'; this.style.boxShadow='0 0 15px rgba(22,163,74,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">A) I'm ______</span>
-            <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">B) Hi! / Hello!</span>
-            <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">C) What's your name?</span>
+          
+          <!-- Question 2 -->
+          <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 14px; padding: 15px;">
+            <p style="color: #fbbf24; font-size: 1.2rem; margin-bottom: 3px;"><span style="background: #fbbf24; color: #0f172a; padding: 2px 8px; border-radius: 6px; margin-right: 8px; font-weight: bold;">2</span>What words do you use to say your name?</p>
+            <p style="color: #9ca3af; font-size: 0.85rem;">¿Qué palabras usas para decir tu nombre?</p>
+            <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+              <span onclick="this.style.background='linear-gradient(135deg, #16a34a, #15803d)'; this.style.boxShadow='0 0 15px rgba(22,163,74,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">A) I'm ______</span>
+              <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">B) Hi! / Hello!</span>
+              <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">C) What's your name?</span>
+            </div>
           </div>
-        </div>
-        
-        <!-- Question 3 -->
-        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 14px; padding: 15px;">
-          <p style="color: #fbbf24; font-size: 1.3rem; margin-bottom: 3px;"><span style="background: #fbbf24; color: #1e3a5f; padding: 2px 8px; border-radius: 6px; margin-right: 8px; font-weight: bold;">3</span>What words do you use to ask someone's name?</p>
-          <p style="color: #9ca3af; font-size: 0.85rem; opacity: 0.7;">¿Qué palabras usas para preguntar el nombre de alguien?</p>
-          <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
-            <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">A) Nice to meet you!</span>
-            <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">B) I'm ______</span>
-            <span onclick="this.style.background='linear-gradient(135deg, #16a34a, #15803d)'; this.style.boxShadow='0 0 15px rgba(22,163,74,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">C) What's your name?</span>
+          
+          <!-- Question 3 -->
+          <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 14px; padding: 15px;">
+            <p style="color: #fbbf24; font-size: 1.2rem; margin-bottom: 3px;"><span style="background: #fbbf24; color: #0f172a; padding: 2px 8px; border-radius: 6px; margin-right: 8px; font-weight: bold;">3</span>What words do you use to ask someone's name?</p>
+            <p style="color: #9ca3af; font-size: 0.85rem;">¿Qué palabras usas para preguntar el nombre de alguien?</p>
+            <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+              <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">A) Nice to meet you!</span>
+              <span onclick="this.style.background='linear-gradient(135deg, #dc2626, #b91c1c)'; this.style.boxShadow='0 0 15px rgba(220,38,38,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">B) I'm ______</span>
+              <span onclick="this.style.background='linear-gradient(135deg, #16a34a, #15803d)'; this.style.boxShadow='0 0 15px rgba(22,163,74,0.6)';" style="background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; padding: 8px 12px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.2s;">C) What's your name?</span>
+            </div>
           </div>
         </div>
       </div>
@@ -526,55 +450,64 @@ margin-top: 40px;
   <!-- Slide 6: Let's Practice -->
   <div class="slide">
     <div class="slide-header">
-      <div></div>
-      <div class="slide-num">6</div>
+      <div class="slide-num">6/11</div>
     </div>
     <div class="slide-content">
-      <div style="position: absolute; left: 200px; top: 50px; text-align: center;">
-        <svg width="120" height="120" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="5" y="15" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
-          <rect x="43" y="15" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
-          <rect x="5" y="45" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
-          <rect x="43" y="45" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
-          <circle cx="21" cy="27" r="6" fill="#fff"/>
-          <circle cx="59" cy="27" r="6" fill="#fff"/>
-          <circle cx="21" cy="57" r="6" fill="#fff"/>
-          <circle cx="59" cy="57" r="6" fill="#fff"/>
-        </svg>
-        <p style="color: #6d28d9; font-size: 1.2rem; font-weight: 700; margin-top: 5px;">BREAKOUT ROOMS</p>
-        <p style="color: #6d28d9; font-size: 0.85rem; opacity: 0.8; margin-top: 5px;">Salas de trabajo</p>
-      </div>
-      <h2 style="font-size: 5rem; margin-bottom: 5px; margin-top: -180px; color: #1e3a5f;">Let's Practice!</h2>
-      <p class="title-es" style="font-size: 1.4rem; color: #374151; margin-bottom: 30px;">(Practiquemos)</p>
+      <h2 style="font-size: 5rem; margin-bottom: 5px; color: #ffffff;">Let's Practice!</h2>
+      <p class="title-es">(Practiquemos)</p>
       
-      <div style="position: absolute; right: 80px; top: 180px; text-align: center; background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 20px 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(220,38,38,0.4);">
-        <p style="color: #fff; font-size: 1rem; margin-bottom: 5px;">TIME</p>
-        <p style="color: #fff; font-size: 2.5rem; font-weight: bold; font-family: monospace;">05:00</p>
-        <p style="color: #fecaca; font-size: 0.8rem;">5 minutos</p>
-      </div>
-      
-      <div style="display: flex; justify-content: center; gap: 40px; width: 100%; max-width: 900px; margin-bottom: 30px; margin-top: 60px;">
-        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 20px; padding: 30px; text-align: center; width: 320px; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 15px 40px rgba(59,130,246,0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
-          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid #fbbf24;margin-bottom:15px;">
-          <h3 style="color: #fbbf24; font-size: 1.6rem; margin-bottom: 15px;">Student A</h3>
-          <p style="color:#fbbf24; font-size: 1.5rem;">Ask: "What's your name?"</p>
-          <p style="color:#9ca3af; font-size: 0.9rem; opacity: 0.7; margin-bottom: 10px;">Pregunta: "¿Cómo te llamas?"</p>
-          <p style="color:#fbbf24; font-size: 1.5rem;">Answer: "I'm ______"</p>
-          <p style="color:#9ca3af; font-size: 0.9rem; opacity: 0.7;">Responde: "Me llamo ______"</p>
+      <div style="display: flex; justify-content: center; gap: 40px; width: 100%; max-width: 900px; margin-bottom: 25px; align-items: flex-start;">
+        <!-- Breakout Rooms badge -->
+        <div style="position: absolute; left: 60px; top: 120px; text-align: center;">
+          <svg width="100" height="100" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="5" y="15" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
+            <rect x="43" y="15" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
+            <rect x="5" y="45" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
+            <rect x="43" y="45" width="32" height="25" rx="4" fill="#8b5cf6" stroke="#6d28d9" stroke-width="3"/>
+            <circle cx="21" cy="27" r="6" fill="#fff"/>
+            <circle cx="59" cy="27" r="6" fill="#fff"/>
+            <circle cx="21" cy="57" r="6" fill="#fff"/>
+            <circle cx="59" cy="57" r="6" fill="#fff"/>
+          </svg>
+          <p style="color: #a78bfa; font-size: 1rem; font-weight: 700; margin-top: 5px;">BREAKOUT ROOMS</p>
+          <p style="color: #a78bfa; font-size: 0.8rem; margin-top: 3px;">Salas de trabajo</p>
         </div>
+
+        <!-- Timer -->
+        <div style="position: absolute; right: 60px; top: 120px; text-align: center; background: linear-gradient(135deg, #dc2626, #b91c1c); padding: 18px 28px; border-radius: 20px; box-shadow: 0 10px 30px rgba(220,38,38,0.4);">
+          <p style="color: #fff; font-size: 1rem; margin-bottom: 5px;">TIME</p>
+          <p style="color: #fff; font-size: 2.5rem; font-weight: bold; font-family: monospace;" id="timer">05:00</p>
+          <p style="color: #fecaca; font-size: 0.8rem;">5 minutos</p>
+        </div>
+
+        <!-- Student A -->
         <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 20px; padding: 30px; text-align: center; width: 320px; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 15px 40px rgba(59,130,246,0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:4px solid #fbbf24;margin-bottom:15px;">
-          <h3 style="color: #fbbf24; font-size: 1.6rem; margin-bottom: 15px;">Student B</h3>
-          <p style="color:#fbbf24; font-size: 1.5rem;">Ask: "What's your name?"</p>
-          <p style="color:#9ca3af; font-size: 0.9rem; opacity: 0.7; margin-bottom: 10px;">Pregunta: "¿Cómo te llamas?"</p>
-          <p style="color:#fbbf24; font-size: 1.5rem;">Answer: "I'm ______"</p>
-          <p style="color:#9ca3af; font-size: 0.9rem; opacity: 0.7;">Responde: "Me llamo ______"</p>
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&h=120&fit=crop&crop=face" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid #fbbf24;margin-bottom:15px;">
+          <h3 style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 15px;">Student A</h3>
+          <p style="color:#fbbf24; font-size: 1.3rem; margin-bottom: 5px;">Ask:</p>
+          <p style="color:#fff; font-size: 1.1rem; margin-bottom: 5px;">"What's your name?"</p>
+          <p style="color:#9ca3af; font-size: 0.85rem; margin-bottom: 15px;">"¿Cómo te llamas?"</p>
+          <p style="color:#fbbf24; font-size: 1.3rem; margin-bottom: 5px;">Answer:</p>
+          <p style="color:#fff; font-size: 1.1rem;">"I'm ______"</p>
+          <p style="color:#9ca3af; font-size: 0.85rem;">"Me llamo ______"</p>
+        </div>
+
+        <!-- Student B -->
+        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 20px; padding: 30px; text-align: center; width: 320px; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'; this.style.boxShadow='0 15px 40px rgba(59,130,246,0.4)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&h=120&fit=crop&crop=face" style="width:110px;height:110px;border-radius:50%;object-fit:cover;border:4px solid #fbbf24;margin-bottom:15px;">
+          <h3 style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 15px;">Student B</h3>
+          <p style="color:#fbbf24; font-size: 1.3rem; margin-bottom: 5px;">Ask:</p>
+          <p style="color:#fff; font-size: 1.1rem; margin-bottom: 5px;">"What's your name?"</p>
+          <p style="color:#9ca3af; font-size: 0.85rem; margin-bottom: 15px;">"¿Cómo te llamas?"</p>
+          <p style="color:#fbbf24; font-size: 1.3rem; margin-bottom: 5px;">Answer:</p>
+          <p style="color:#fff; font-size: 1.1rem;">"I'm ______"</p>
+          <p style="color:#9ca3af; font-size: 0.85rem;">"Me llamo ______"</p>
         </div>
       </div>
       
-      <div style="background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 16px; padding: 20px 40px; text-align: center; margin-top: 20px;">
-        <h3 style="color:#fff; font-size: 1.8rem;">Change roles</h3>
-        <p style="color:#fecaca; font-size: 1.1rem;">Ahora intercambian roles</p>
+      <div style="background: linear-gradient(135deg, #dc2626, #b91c1c); border-radius: 16px; padding: 18px 40px; text-align: center; margin-top: 10px;">
+        <h3 style="color:#fff; font-size: 1.6rem; margin-bottom: 5px;">Change roles</h3>
+        <p style="color:#fecaca; font-size: 1rem;">Ahora intercambian roles</p>
       </div>
     </div>
   </div>
@@ -582,30 +515,69 @@ margin-top: 40px;
   <!-- Slide 7: Meet 3 Classmates -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">7</div>
+      <div class="slide-num">7/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 4.5rem; color: #1e3a5f; margin-bottom: 5px; margin-top: -200px;">Meet 3 Classmates</h2>
+      <h2 style="font-size: 4.5rem; color: #ffffff; margin-bottom: 5px;">Meet 3 Classmates</h2>
       <p class="title-es">Conoce 3 compañeros</p>
+      
+      <div style="display: flex; gap: 30px; margin-top: 20px; flex-wrap: wrap; justify-content: center; max-width: 900px;">
+        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 20px; padding: 25px 30px; text-align: center; min-width: 220px; flex: 1;">
+          <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+          <h3 style="color: #fbbf24; margin-bottom: 15px;">Person 1</h3>
+          <p style="color: #cbd5e1; font-size: 1.1rem;">Name: <span style="color: #4ade80;">__________</span></p>
+        </div>
+        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 20px; padding: 25px 30px; text-align: center; min-width: 220px; flex: 1;">
+          <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+          <h3 style="color: #fbbf24; margin-bottom: 15px;">Person 2</h3>
+          <p style="color: #cbd5e1; font-size: 1.1rem;">Name: <span style="color: #4ade80;">__________</span></p>
+        </div>
+        <div style="background: linear-gradient(135deg, #1e3a5f, #2d5a87); border: 2px solid #3b82f6; border-radius: 20px; padding: 25px 30px; text-align: center; min-width: 220px; flex: 1;">
+          <div style="font-size: 3rem; margin-bottom: 10px;">👤</div>
+          <h3 style="color: #fbbf24; margin-bottom: 15px;">Person 3</h3>
+          <p style="color: #cbd5e1; font-size: 1.1rem;">Name: <span style="color: #4ade80;">__________</span></p>
+        </div>
+      </div>
+
+      <div style="background: linear-gradient(135deg, #166534, #15803d); border: 2px solid #22c55e; border-radius: 20px; padding: 25px 40px; margin-top: 30px; max-width: 700px; text-align: left;">
+        <h3 style="color: #4ade80; margin-bottom: 15px;">🗣️ Script / Guión</h3>
+        <p style="color: #fff; font-size: 1.2rem; margin-bottom: 5px;"><span style="color: #fbbf24;">A:</span> "Hi! What's your name?"</p>
+        <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 12px; margin-left: 20px;">¡Hola! ¿Cómo te llamas?</p>
+        <p style="color: #fff; font-size: 1.2rem; margin-bottom: 5px;"><span style="color: #fbbf24;">B:</span> "I'm ______. Nice to meet you!"</p>
+        <p style="color: #9ca3af; font-size: 0.9rem; margin-bottom: 12px; margin-left: 20px;">Me llamo ______. ¡Mucho gusto!</p>
+        <p style="color: #fff; font-size: 1.2rem; margin-bottom: 5px;"><span style="color: #fbbf24;">A:</span> "Nice to meet you too!"</p>
+        <p style="color: #9ca3af; font-size: 0.9rem; margin-left: 20px;">¡Mucho gusto a mí también!</p>
+      </div>
     </div>
   </div>
 
-  <!-- Slide 8: Need Help -->
+  <!-- Slide 8: Need Help? -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">8</div>
+      <div class="slide-num">8/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 4.5rem; color: #1e3a5f; margin-bottom: 5px; margin-top: -200px;">Need Help?</h2>
-      <p class="title-es">Necesitas ayuda?</p>
+      <h2 style="font-size: 4.5rem; color: #ffffff; margin-bottom: 5px;">Need Help?</h2>
+      <p class="title-es">¿Necesitas ayuda?</p>
       
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=200&fit=crop" style="width:100%;max-width:500px;border-radius:20px;margin:20px 0;">
-      
-      <div style="max-width: 600px;">
-        <div class="step"><span class="step-num">1</span> Keep talking in English</div>
-        <div class="step"><span class="step-num">2</span> Mistakes are OK!</div>
-        <div class="step"><span class="step-num">3</span> Practice makes perfect</div>
-        <div class="step"><span class="step-num">4</span> Ask "What?" if you don't understand</div>
+      <div style="display: flex; gap: 40px; align-items: flex-start; width: 100%; max-width: 1000px;">
+        <div style="flex: 1;">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=500&h=300&fit=crop" style="width:100%;border-radius:20px;margin-bottom:20px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);">
+        </div>
+        <div style="flex: 1;">
+          <div class="step"><span class="step-num">1</span> Keep talking in English
+            <span style="display:block; font-size:0.9rem; color:#fef3c7; margin-top:5px; margin-left:48px;">¡Sigue hablando en inglés!</span>
+          </div>
+          <div class="step"><span class="step-num">2</span> Mistakes are OK!
+            <span style="display:block; font-size:0.9rem; color:#fef3c7; margin-top:5px; margin-left:48px;">¡Los errores están bien!</span>
+          </div>
+          <div class="step"><span class="step-num">3</span> Practice makes perfect
+            <span style="display:block; font-size:0.9rem; color:#fef3c7; margin-top:5px; margin-left:48px;">La práctica hace al maestro</span>
+          </div>
+          <div class="step"><span class="step-num">4</span> Ask "What?" if you don't understand
+            <span style="display:block; font-size:0.9rem; color:#fef3c7; margin-top:5px; margin-left:48px;">Pregunta "¿Qué?" si no entiendes</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -613,23 +585,30 @@ margin-top: 40px;
   <!-- Slide 9: Let's Improve -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">9</div>
+      <div class="slide-num">9/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 4.5rem; color: #1e3a5f; margin-bottom: 5px; margin-top: -200px;">Let's Improve</h2>
+      <h2 style="font-size: 4.5rem; color: #ffffff; margin-bottom: 5px;">Let's Improve</h2>
       <p class="title-es">Mejoremos</p>
       
-      <div class="two-col">
-        <div class="card" style="border-color: rgba(239,68,68,0.3);">
-          <h3 style="color: #ef4444;">Wrong / Incorrecto</h3>
-          <p style="margin-top: 20px; font-size: 1.3rem; color: #fca5a5;">"I am Ana name"</p>
-          <p style="color: #fca5a5;">"What your name?"</p>
+      <div class="two-col" style="margin-top: 20px; max-width: 900px;">
+        <div class="card" style="border-color: rgba(239,68,68,0.5); background: rgba(239,68,68,0.1);">
+          <h3 style="color: #ef4444; font-size: 2rem; margin-bottom: 20px;">❌ Wrong</h3>
+          <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 15px;">Incorrecto</p>
+          <p style="font-size: 1.3rem; color: #fca5a5; margin-bottom: 10px;">"I am Ana name"</p>
+          <p style="font-size: 1.3rem; color: #fca5a5;">"What your name?"</p>
         </div>
-        <div class="card" style="border-color: rgba(74,222,128,0.3);">
-          <h3 style="color: #4ade80;">Correct / Correcto</h3>
-          <p style="margin-top: 20px; font-size: 1.3rem; color: #86efac;">"I'm Ana"</p>
-          <p style="color: #86efac;">"What's your name?"</p>
+        <div class="card" style="border-color: rgba(74,222,128,0.5); background: rgba(74,222,128,0.1);">
+          <h3 style="color: #4ade80; font-size: 2rem; margin-bottom: 20px;">✅ Correct</h3>
+          <p style="font-size: 0.9rem; color: #9ca3af; margin-bottom: 15px;">Correcto</p>
+          <p style="font-size: 1.3rem; color: #86efac; margin-bottom: 10px;">"I'm Ana"</p>
+          <p style="font-size: 1.3rem; color: #86efac;">"What's your name?"</p>
         </div>
+      </div>
+
+      <div style="background: rgba(249,115,22,0.15); border: 2px solid rgba(249,115,22,0.5); border-radius: 20px; padding: 20px 40px; margin-top: 25px; max-width: 700px;">
+        <p style="font-size: 1.3rem; color: #fbbf24; font-weight: 600; margin-bottom: 5px;">💡 Remember / Recuerda:</p>
+        <p style="font-size: 1.1rem; color: #fff;">Use <span style="color: #4ade80; font-weight: bold;">contractions</span>: "I'm" not "I am", "What's" not "What is"</p>
       </div>
     </div>
   </div>
@@ -637,19 +616,37 @@ margin-top: 40px;
   <!-- Slide 10: Reflection -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">10</div>
+      <div class="slide-num">10/11</div>
     </div>
     <div class="slide-content">
-      <h2 style="font-size: 4.5rem; color: #1e3a5f; margin-bottom: 5px; margin-top: -200px;">Reflection</h2>
-      <p class="title-es">Reflexion</p>
+      <h2 style="font-size: 4.5rem; color: #ffffff; margin-bottom: 5px;">Reflection</h2>
+      <p class="title-es">Reflexión</p>
       
-      <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=200&fit=crop" style="width:100%;max-width:500px;border-radius:20px;margin:20px 0;">
-      
-      <div class="activity-box">
-        <h3 style="color:#fff; font-size:1.5rem;">What did you learn today?</h3>
-        <p style="margin-top: 15px; color: #fbbf24; font-size: 1.4rem;">¿Qué aprendiste?</p>
-        <p style="margin-top: 20px; font-size: 1.3rem; color: #fff;">Can you introduce yourself in English?</p>
-        <p style="color: #94a3b8;">(¿Puedes presentarte en inglés?)</p>
+      <div style="display: flex; gap: 40px; align-items: flex-start; width: 100%; max-width: 1000px;">
+        <div style="flex: 1;">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=300&fit=crop" style="width:100%;border-radius:20px; box-shadow: 0 10px 40px rgba(0,0,0,0.4);">
+        </div>
+        <div style="flex: 1;">
+          <div class="activity-box" style="text-align: left;">
+            <h3 style="color:#fff; font-size:1.5rem; margin-bottom: 10px;">What did you learn today?</h3>
+            <p style="color: #fbbf24; font-size: 1.2rem; margin-bottom: 20px;">¿Qué aprendiste hoy?</p>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 15px;">
+                <p style="color: #4ade80; font-size: 1rem; font-weight: 600; margin-bottom: 5px;">✓ I can say my name</p>
+                <p style="color: #9ca3af; font-size: 0.85rem;">Puedo decir mi nombre</p>
+              </div>
+              <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 15px;">
+                <p style="color: #4ade80; font-size: 1rem; font-weight: 600; margin-bottom: 5px;">✓ I can ask someone's name</p>
+                <p style="color: #9ca3af; font-size: 0.85rem;">Puedo preguntar el nombre de alguien</p>
+              </div>
+              <div style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 15px;">
+                <p style="color: #4ade80; font-size: 1rem; font-weight: 600; margin-bottom: 5px;">✓ I can use "Nice to meet you!"</p>
+                <p style="color: #9ca3af; font-size: 0.85rem;">Puedo usar frases de presentación</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -657,22 +654,25 @@ margin-top: 40px;
   <!-- Slide 11: Closing -->
   <div class="slide">
     <div class="slide-header">
-      <div class="slide-num">11</div>
+      <div class="slide-num">11/11</div>
     </div>
-    <div class="slide-content">
+    <div class="slide-content" style="justify-content: center; align-items: center;">
       <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english-classes/main/imagenes/logoblanco2.png" class="logo-img-sm">
-      <h1>GOOD JOB!</h1>
-      <p class="title-es" style="color: #fbbf24; font-size: 1.5rem;">Excelente trabajo!</p>
+      <h1 style="font-size: 5rem; margin-bottom: 10px;">GOOD JOB! 🎉</h1>
+      <p class="title-es" style="color: #fbbf24; font-size: 1.5rem; margin-bottom: 30px;">¡Excelente trabajo!</p>
       
-      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=500&h=180&fit=crop" style="width:100%;max-width:500px;border-radius:20px;margin:30px 0;opacity:0.8;">
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=200&fit=crop" style="width:100%;max-width:550px;border-radius:20px;margin:20px 0;opacity:0.85; box-shadow: 0 10px 40px rgba(0,0,0,0.4);">
       
-      <p style="font-size: 1.4rem; color: #fff;">See you next class!</p>
-      <p style="color: #64748b; margin-top: 8px;">(Nos vemos en la proxima clase)</p>
+      <div style="background: rgba(249,115,22,0.15); border: 2px solid rgba(249,115,22,0.4); border-radius: 20px; padding: 25px 50px; margin-top: 20px; text-align: center;">
+        <p style="font-size: 2rem; color: #fff; font-weight: 700; margin-bottom: 10px;">See you next class!</p>
+        <p style="color: #94a3b8; font-size: 1.2rem;">Nos vemos en la próxima clase 👋</p>
+      </div>
     </div>
   </div>
 
-  <button class="btn-nav btn-prev" onclick="changeSlide(-1)">←</button>
-  <button class="btn-nav btn-next" onclick="changeSlide(1)">→</button>
+  <!-- ✅ Botones de navegación -->
+  <button class="btn-nav btn-prev" onclick="changeSlide(-1)">← Prev</button>
+  <button class="btn-nav btn-next" onclick="changeSlide(1)">Next →</button>
 
   <script>
     let currentSlide = 0;
@@ -686,27 +686,24 @@ margin-top: 40px;
       progress.style.width = ((currentSlide + 1) / slides.length * 100) + '%';
     }
 
-    function changeSlide(dir) { showSlide(currentSlide + dir); }
+    function changeSlide(dir) {
+      showSlide(currentSlide + dir);
+    }
 
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); changeSlide(1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); changeSlide(-1); }
     });
 
+    // Touch swipe support
+    let touchStartX = 0;
+    document.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; });
+    document.addEventListener('touchend', (e) => {
+      const diff = touchStartX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) changeSlide(diff > 0 ? 1 : -1);
+    });
+
     showSlide(0);
-    
-    function debugSlides() {
-      console.log("Total slides: " + slides.length);
-      console.log("Current slide: " + currentSlide);
-    }
   </script>
-
-<div style="position: fixed; bottom: 10px; left: 10px; z-index: 999999;">
-<a href="javascript:changeSlide(-1)" style="background: #4f46e5; color: white; padding: 20px 40px; font-size: 24px; text-decoration: none; border-radius: 10px; border: 3px solid white;">◀ ANTERIOR</a>
-</div>
-
-<div style="position: fixed; bottom: 10px; right: 10px; z-index: 999999;">
-<a href="javascript:changeSlide(1)" style="background: #f97316; color: white; padding: 20px 40px; font-size: 24px; text-decoration: none; border-radius: 10px; border: 3px solid white;">SIGUIENTE ▶</a>
-</div>
 </body>
 </html>
