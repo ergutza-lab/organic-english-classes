@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nice to Meet You - Clase 1</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { 
+      font-family: 'Outfit', sans-serif; 
+      background: #0f172a;
+      color: white;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+    
+    .slide {
+      display: none;
+      min-height: 100vh;
+      padding: 0;
+      position: relative;
+      animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background-image: url('https://raw.githubusercontent.com/ergutza-lab/organic-english-classes/main/fondoclases.webp');
+      background-size: cover;
+      background-position: center;
+    }
+    .slide.active { display: flex; flex-direction: column; }
+    
+    .bg-accent {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .bg-accent-2 {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(74,222,128,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(50px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+    
+    .slide-header {
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .slide-num {
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .breakout-badge {
+      background: rgba(74,222,128,0.2);
+      border: 1px solid #4ade80;
+      padding: 10px 20px;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: #4ade80;
+    }
+    .breakout-timer {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      color: #0f172a;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 60px 60px;
+      text-align: center;
+    }
+    
+    h1 { 
+      font-size: 4rem; 
+      font-weight: 900;
+      background: linear-gradient(135deg, #f97316, #fbbf24);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 15px;
+    }
+    h2 { 
+      font-size: 3rem; 
+      font-weight: 700; 
+      color: #fbbf24;
+      margin-bottom: 15px;
+    }
+    h3 { font-size: 2rem; margin-bottom: 15px; color: #4ade80; }
+    
+    .title-es {
+      font-size: 1.2rem;
+      color: #64748b;
+      font-weight: 400;
+      margin-top: -10px;
+    }
+    
+    .phrase-card {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
+      padding: 22px 32px;
+      margin: 10px 0;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 700px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.3s;
+    }
+    .phrase-card:hover {
+      transform: scale(1.03) translateX(5px);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 15px 40px rgba(249,115,22,0.15);
+    }
+    .phrase-card .label { 
+      background: linear-gradient(135deg, #f97316, #ea580c); 
+      padding: 10px 18px; 
+      border-radius: 10px; 
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+    .phrase-card .text { font-size: 1.5rem; font-weight: 600; }
+    .phrase-es { font-size: 0.9rem; color: #64748b; display: block; margin-top: 3px; }
+    
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; max-width: 1000px; }
+    .card { 
+      background: rgba(255,255,255,0.08);
+      padding: 35px; 
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.3s;
+    }
+    .card:hover { 
+      transform: translateY(-8px) scale(1.02); 
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 20px 50px rgba(249,115,22,0.2);
+    }
+    
+    .activity-box {
+      background: linear-gradient(135deg, rgba(249,115,22,0.2), rgba(251,191,36,0.1));
+      border: 2px solid rgba(249,115,22,0.4);
+      padding: 45px;
+      border-radius: 24px;
+      max-width: 800px;
+    }
+    
+    .person-img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #f97316;
+      box-shadow: 0 0 40px rgba(249,115,22,0.3);
+      transition: transform 0.3s;
+    }
+    .person-img:hover { transform: scale(1.1); }
+    
+    .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      border: 3px solid #f97316;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    .avatar:hover { transform: scale(1.15); }
+    
+    .dialogue {
+      background: rgba(0,0,0,0.4);
+      padding: 35px;
+      border-radius: 18px;
+      max-width: 700px;
+      text-align: left;
+    }
+    .dialogue p { font-size: 1.4rem; margin: 12px 0; }
+    .dialogue strong { color: #fbbf24; }
+    .dialogue-es { font-size: 1rem; color: #64748b; }
+    
+    .step { 
+      background: rgba(255,255,255,0.08); 
+      padding: 22px; 
+      margin: 12px 0; 
+      border-radius: 14px; 
+      border-left: 5px solid #4ade80;
+      transition: all 0.3s;
+    }
+    .step:hover { transform: translateX(8px); background: rgba(255,255,255,0.12); }
+    .step-num { 
+      display: inline-block; 
+      background: #4ade80; 
+      color: #0f172a; 
+      width: 38px; 
+      height: 38px; 
+      border-radius: 50%; 
+      text-align: center; 
+      line-height: 38px;
+      font-weight: bold;
+      margin-right: 15px;
+    }
+    
+    .btn-nav {
+      position: fixed;
+      bottom: 30px;
+      background: linear-gradient(135deg, #f97316, #ea580c);
+      color: white;
+      border: none;
+      padding: 16px 32px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      box-shadow: 0 10px 30px rgba(249,115,22,0.3);
+      z-index: 100;
+    }
+    .btn-nav:hover { transform: scale(1.08) translateY(-3px); }
+    .btn-prev { left: 30px; background: linear-gradient(135deg, #6366f1, #4f46e5); }
+    .btn-next { right: 30px; }
+    
+    .progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #f97316, #fbbf24, #4ade80);
+      z-index: 100;
+    }
+    
+    .highlight { color: #4ade80; font-weight: 600; }
+    .orange { color: #f97316; font-weight: 600; }
+    .yellow { color: #fbbf24; font-weight: 600; }
+    
+    .avatar-group { display: flex; justify-content: center; gap: 20px; margin: 30px 0; }
+    
+    .logo-img {
+      width: 120px;
+      animation: float 4s ease-in-out infinite;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+    }
+    
+    @media (max-width: 768px) {
+      h1 { font-size: 2.5rem; }
+      h2 { font-size: 1.8rem; }
+      .two-col { grid-template-columns: 1fr; }
+      .slide-content { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <!-- Slide 1: Título -->
+  <div class="slide active">
+    <div class="bg-accent"></div>
+    <div class="bg-accent-2"></div>
+    <div class="slide-header">
+      <div class="slide-num">1</div>
+    </div>
+    <div class="slide-content">
+      <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english-classes/main/logotransparente.png" class="logo-img">
+      <h1>NICE TO MEET YOU</h1>
+      <p style="font-size: 1.8rem; color: #94a3b8;">Class 1 - Week 1, Day 1</p>
+      <p style="margin-top: 40px; color: #64748b; font-size: 1.1rem;">Press → to start</p>
+    </div>
+  </div>
+
+  <!-- Slide 2: Goals -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">2</div>
+    </div>
+    <div class="slide-content">
+      <h2>Today's Goals</h2>
+      <p class="title-es"> Objetivos de hoy</p>
+      <div class="avatar-group">
+        <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english/main/images/ELLA.webp" class="avatar">
+        <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english/main/images/EL.webp" class="avatar">
+        <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english/main/images/LETTY.webp" class="avatar">
+      </div>
+      <div class="phrase-card" style="justify-content: center;">
+        <span class="label">Goal</span>
+        <span class="text">Introduce yourself & meet classmates</span>
+      </div>
+      <div style="margin-top: 25px; max-width: 600px;">
+        <p class="highlight" style="font-size: 1.4rem; margin-bottom: 15px;">You will be able to:</p>
+        <div class="step"><span class="step-num">1</span> Say your name in English</div>
+        <div class="step"><span class="step-num">2</span> Ask someone's name</div>
+        <div class="step"><span class="step-num">3</span> Use introduction phrases</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 3: Warm Up -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">3</div>
+    </div>
+    <div class="slide-content">
+      <h2>Brain Gym</h2>
+      <p class="title-es">Calentamiento cerebral</p>
+      <div class="activity-box">
+        <p style="font-size: 1.6rem; margin-bottom: 15px;">Wake up your brain!</p>
+        <p style="color: #94a3b8; margin-bottom: 20px;">Stand up, stretch and repeat the phrases</p>
+        <p style="font-size: 1.3rem; color: #64748b;">(El maestro guia la actividad)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 4: Dialogue -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">4</div>
+    </div>
+    <div class="slide-content">
+      <h2>Look & Listen</h2>
+      <p class="title-es">Observa y escucha</p>
+      
+      <!-- Video container -->
+      <div style="margin-bottom: 20px; width: 100%; max-width: 500px;">
+        <iframe style="width:100%; height:280px; border-radius:16px; border:2px solid rgba(249,115,22,0.4);" 
+          src="https://www.youtube.com/embed/RLs9lIy5WT0?controls=1" 
+          frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <div class="dialogue" style="max-width: 600px; margin-top: 15px;">
+        <p><strong>A:</strong> Hi! <span class="orange">Hello!</span> <span class="dialogue-es">(¡Hola!)</span></p>
+        <p><strong>B:</strong> Hello!</p>
+        <p><strong>A:</strong> I'm Ana. What's your name? <span class="dialogue-es">(¿Cómo te llamas?)</span></p>
+        <p><strong>B:</strong> I'm Carlos. Nice to meet you! <span class="dialogue-es">(¡Mucho gusto!)</span></p>
+        <p><strong>A:</strong> Nice to meet you too! <span class="dialogue-es">(¡Mucho gusto!)</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 5: Useful Phrases -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">5</div>
+    </div>
+    <div class="slide-content">
+      <h2>Useful Language</h2>
+      <p class="title-es">Lenguaje util</p>
+      <div style="display: flex; flex-direction: column; align-items: center;">
+        <div class="phrase-card"><span class="label">Greet</span><span class="text">Hi! / Hello!</span><span class="phrase-es">(Hola)</span></div>
+        <div class="phrase-card"><span class="label">Introduce</span><span class="text">I'm __________</span><span class="phrase-es">(Me llamo...)</span></div>
+        <div class="phrase-card"><span class="label">Ask</span><span class="text">What's your name?</span><span class="phrase-es">(¿Cómo te llamas?)</span></div>
+        <div class="phrase-card"><span class="label">Polite</span><span class="text">Nice to meet you!</span><span class="phrase-es">(¡Mucho gusto!)</span></div>
+        <div class="phrase-card"><span class="label">Reply</span><span class="text">Nice to meet you too!</span><span class="phrase-es">(¡Mucho gusto a ti!)</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 6: Practice -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">6</div>
+    </div>
+    <div class="slide-content">
+      <h2>Practice Together</h2>
+      <p class="title-es">Practica juntos</p>
+      <div class="two-col">
+        <div class="card">
+          <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english/main/images/ELLA.webp" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #f97316;">
+          <h3 style="margin-top: 15px;">Student A</h3>
+          <p style="margin-top: 12px;">Ask: "What's your name?"</p>
+          <p>Answer: "I'm __________"</p>
+        </div>
+        <div class="card">
+          <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english/main/images/EL.webp" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; border: 3px solid #f97316;">
+          <h3 style="margin-top: 15px;">Student B</h3>
+          <p style="margin-top: 12px;">Ask: "What's your name?"</p>
+          <p>Answer: "I'm __________"</p>
+        </div>
+      </div>
+      <div class="activity-box" style="margin-top: 30px;">
+        <h3>Change roles</h3>
+        <p style="color: #94a3b8;">Now you are the other person</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 7: Breakout Rooms -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">7</div>
+      <div style="display: flex; gap: 15px; align-items: center;">
+        <div class="breakout-badge"><span style="font-size: 1.3rem;">BR</span> Breakout Rooms</div>
+      </div>
+    </div>
+    <div class="slide-content">
+      <h2>Meet 3 Classmates</h2>
+      <p class="title-es">Conoce 3 companeros</p>
+      <div class="activity-box">
+        <p style="font-size: 1.5rem; margin: 20px 0;">Use these phrases:</p>
+        <div style="text-align: left; padding: 25px; background: rgba(0,0,0,0.3); border-radius: 16px;">
+          <p style="font-size: 1.3rem;"><span style="color:#f97316">H</span> <strong>Hi! I'm __________</strong></p>
+          <p style="font-size: 1.3rem;"><span style="color:#f97316">Q</span> <strong>What's your name?</strong></p>
+          <p style="font-size: 1.3rem;"><span style="color:#f97316">N</span> <strong>Nice to meet you!</strong></p>
+        </div>
+        <div class="breakout-timer" style="margin-top: 25px; display: inline-block;">8 min</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 8: Tips -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">8</div>
+    </div>
+    <div class="slide-content">
+      <h2>Need Help?</h2>
+      <p class="title-es">Necesitas ayuda?</p>
+      <div style="max-width: 650px;">
+        <div class="step"><span class="step-num">1</span> Keep the conversation flowing</div>
+        <div class="step"><span class="step-num">2</span> Mistakes are normal!</div>
+        <div class="step"><span class="step-num">3</span> Repeat many times</div>
+        <div class="step"><span class="step-num">4</span> If you don't understand, ask "What?"</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 9: Corrections -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">9</div>
+    </div>
+    <div class="slide-content">
+      <h2>Let's Improve</h2>
+      <p class="title-es">Mejoremos</p>
+      <div class="two-col">
+        <div class="card">
+          <h3 style="color: #ef4444;">Wrong</h3>
+          <p style="margin-top: 20px; font-size: 1.3rem;">"I am Ana name"</p>
+          <p>"What your name?"</p>
+        </div>
+        <div class="card">
+          <h3 style="color: #4ade80;">Correct</h3>
+          <p style="margin-top: 20px; font-size: 1.3rem;">"I'm Ana"</p>
+          <p>"What's your name?"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Slide 10: Reflection -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">10</div>
+    </div>
+    <div class="slide-content">
+      <h2>Let's Reflect</h2>
+      <p class="title-es">Reflexionemos</p>
+      <div class="activity-box">
+        <h3>What did you learn today?</p>
+        <p style="margin-top: 20px; font-size: 1.5rem; color: #94a3b8;">¿Qué aprendiste hoy?</p>
+        <p style="margin-top: 25px; font-size: 1.4rem;">Can you introduce yourself in English?</p>
+        <p style="color: #64748b; font-size: 1.1rem;">(¿Puedes presentarte en inglés?)</p>
+      </div>
+      <p style="margin-top: 30px; color: #64748b;">Share with the class</p>
+    </div>
+  </div>
+
+  <!-- Slide 11: Closing -->
+  <div class="slide">
+    <div class="bg-accent"></div>
+    <div class="slide-header">
+      <div class="slide-num">11</div>
+    </div>
+    <div class="slide-content">
+      <img src="https://raw.githubusercontent.com/ergutza-lab/organic-english-classes/main/logotransparente.png" class="logo-img">
+      <h1>GOOD JOB!</h1>
+      <p class="title-es" style="font-size: 1.5rem; color: #fbbf24; margin-top: -5px;">Excelente trabajo!</p>
+      <p style="font-size: 1.5rem; margin-top: 30px;">See you next class!</p>
+      <p style="color: #64748b; margin-top: 10px;">(Nos vemos en la proxima clase)</p>
+    </div>
+  </div>
+
+  <button class="btn-nav btn-prev" onclick="changeSlide(-1)">Prev</button>
+  <button class="btn-nav btn-next" onclick="changeSlide(1)">Next</button>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const progress = document.getElementById('progress');
+
+    function showSlide(n) {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (n + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      progress.style.width = ((currentSlide + 1) / slides.length * 100) + '%';
+    }
+
+    function changeSlide(dir) { showSlide(currentSlide + dir); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
+      if (e.key === 'ArrowLeft') changeSlide(-1);
+    });
+
+    showSlide(0);
+  </script>
+</body>
+</html>
