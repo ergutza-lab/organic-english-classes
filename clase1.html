@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organic English – A1.1 Day 1 – Nice to meet you</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #142236;
+    --navy-light: #1a2f48;
+    --orange: #f97316;
+    --orange-soft: #fb923c;
+    --orange-glow: rgba(249,115,22,0.18);
+    --orange-glow2: rgba(249,115,22,0.08);
+    --cream: #fdf6ec;
+    --white: #ffffff;
+    --text-muted: #94a3b8;
+    --blue-light: #e0f2fe;
+    --success: #22c55e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+  }
+
+  /* ===== SLIDE SYSTEM ===== */
+  .slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    flex-direction: column;
+    background: var(--navy);
+    overflow: hidden;
+  }
+  .slide.active { display: flex; }
+
+  /* ===== BACKGROUND EFFECTS ===== */
+  .bg-bokeh {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+  .bokeh-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.12;
+  }
+  .bokeh-1 { width: 500px; height: 500px; background: var(--orange); top: -150px; right: -100px; }
+  .bokeh-2 { width: 300px; height: 300px; background: #3b82f6; bottom: -80px; left: -60px; }
+  .bokeh-3 { width: 200px; height: 200px; background: var(--orange); bottom: 100px; right: 200px; opacity: 0.07; }
+
+  /* ===== STAGE LABEL ===== */
+  .stage-label {
+    position: absolute;
+    top: 24px; left: 28px;
+    background: rgba(249,115,22,0.12);
+    border: 1px solid rgba(249,115,22,0.3);
+    color: var(--orange-soft);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    z-index: 10;
+  }
+
+  /* ===== LOGO ===== */
+  .logo-badge {
+    position: absolute;
+    top: 20px; right: 24px;
+    display: flex; align-items: center; gap: 8px;
+    z-index: 10;
+  }
+  .logo-icon {
+    width: 32px; height: 32px;
+    background: var(--orange);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-size: 14px; font-weight: 800;
+    color: white;
+  }
+  .logo-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px; font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ===== TIMER ===== */
+  .timer-badge {
+    position: absolute;
+    bottom: 24px; left: 28px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--text-muted);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    z-index: 10;
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  /* ===== BOTTOM RIGHT CONTROLS ===== */
+  .bottom-controls {
+    position: absolute;
+    bottom: 20px; right: 24px;
+    display: flex; align-items: center; gap: 10px;
+    z-index: 10;
+  }
+
+  /* ===== BUTTONS ===== */
+  .btn-next {
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+    box-shadow: 0 4px 20px rgba(249,115,22,0.35);
+  }
+  .btn-next:hover { background: var(--orange-soft); transform: translateY(-1px); box-shadow: 0 6px 24px rgba(249,115,22,0.45); }
+
+  .btn-teacher {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--text-muted);
+    padding: 9px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-teacher:hover { background: rgba(255,255,255,0.12); color: white; }
+
+  .btn-primary {
+    background: var(--orange);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 6px 30px rgba(249,115,22,0.4);
+    letter-spacing: 0.02em;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(249,115,22,0.55); }
+
+  .btn-reveal {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(249,115,22,0.35);
+    color: var(--orange-soft);
+    padding: 11px 24px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Sora', sans-serif;
+  }
+  .btn-reveal:hover { background: var(--orange-glow); border-color: var(--orange); color: white; }
+  .btn-reveal.revealed { background: var(--orange-glow); border-color: var(--orange); color: white; cursor: default; }
+
+  /* ===== CARDS ===== */
+  .card {
+    background: var(--cream);
+    color: var(--navy);
+    border-radius: 16px;
+    padding: 22px 28px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  }
+
+  /* ===== MODAL / POPUP ===== */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal-box {
+    background: var(--navy-light);
+    border: 1px solid rgba(249,115,22,0.25);
+    border-radius: 20px;
+    padding: 32px 36px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  .modal-box h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--orange-soft);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(249,115,22,0.2);
+  }
+  .modal-field { margin-bottom: 14px; }
+  .modal-field .field-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--orange-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .modal-field .field-value {
+    font-size: 13.5px;
+    color: #cbd5e1;
+    line-height: 1.65;
+  }
+  .modal-field .field-value ul { padding-left: 16px; }
+  .modal-field .field-value li { margin-bottom: 3px; }
+  .modal-close {
+    position: absolute;
+    top: 14px; right: 16px;
+    background: rgba(255,255,255,0.08);
+    border: none;
+    color: var(--text-muted);
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .modal-close:hover { background: rgba(255,255,255,0.15); color: white; }
+
+  /* ===== FEEDBACK POPUP ===== */
+  .feedback-popup {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%,-50%) scale(0.85);
+    background: var(--navy-light);
+    border: 1.5px solid rgba(249,115,22,0.4);
+    border-radius: 16px;
+    padding: 20px 28px;
+    max-width: 340px;
+    text-align: center;
+    z-index: 200;
+    opacity: 0;
+    transition: all 0.25s;
+    pointer-events: none;
+  }
+  .feedback-popup.show { opacity: 1; transform: translate(-50%,-50%) scale(1); pointer-events: all; }
+  .feedback-popup p { font-size: 15px; color: var(--white); line-height: 1.5; }
+  .feedback-popup .fp-close {
+    margin-top: 14px;
+    background: var(--orange);
+    border: none;
+    color: white;
+    padding: 7px 22px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: 'Sora', sans-serif;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.3); }
+    50% { box-shadow: 0 0 0 12px rgba(249,115,22,0); }
+  }
+  @keyframes pop {
+    0% { transform: scale(0.85); opacity: 0; }
+    70% { transform: scale(1.04); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
+  .anim-1 { animation: fadeUp 0.6s ease forwards; animation-delay: 0.1s; opacity: 0; }
+  .anim-2 { animation: fadeUp 0.6s ease forwards; animation-delay: 0.3s; opacity: 0; }
+  .anim-3 { animation: fadeUp 0.6s ease forwards; animation-delay: 0.5s; opacity: 0; }
+  .anim-4 { animation: fadeUp 0.6s ease forwards; animation-delay: 0.7s; opacity: 0; }
+  .anim-5 { animation: fadeUp 0.6s ease forwards; animation-delay: 0.9s; opacity: 0; }
+  .anim-6 { animation: fadeUp 0.6s ease forwards; animation-delay: 1.1s; opacity: 0; }
+  .anim-7 { animation: fadeUp 0.6s ease forwards; animation-delay: 1.3s; opacity: 0; }
+
+  /* ===========================
+     SLIDE 0 — COVER
+  =========================== */
+  #slide-0 .content {
+    position: relative; z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10% 0 8%;
+  }
+  #slide-0 .eyebrow {
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--orange-soft);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  #slide-0 .brand-name {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+  #slide-0 .brand-name span { color: var(--orange); }
+  #slide-0 .lesson-tag {
+    display: inline-block;
+    background: rgba(249,115,22,0.12);
+    border: 1px solid rgba(249,115,22,0.3);
+    color: var(--orange-soft);
+    padding: 5px 16px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Sora', sans-serif;
+    margin-bottom: 18px;
+  }
+  #slide-0 .lesson-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+  #slide-0 .tagline {
+    font-size: 16px;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+  #slide-0 .divider-line {
+    width: 60px;
+    height: 3px;
+    background: var(--orange);
+    border-radius: 2px;
+    margin-bottom: 40px;
+  }
+
+  /* ===========================
+     SLIDE 1 — BRAIN GYM
+  =========================== */
+  #slide-1 .content {
+    position: relative; z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 5% 70px;
+    gap: 20px;
+  }
+  #slide-1 .slide-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(26px, 3.5vw, 42px);
+    font-weight: 800;
+    color: var(--white);
+    text-align: center;
+  }
+  #slide-1 .slide-subtitle {
+    font-size: 16px;
+    color: var(--orange-soft);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .gym-cards {
+    display: flex;
+    gap: 20px;
+    margin-top: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .gym-card {
+    background: var(--cream);
+    color: var(--navy);
+    border-radius: 18px;
+    padding: 26px 30px;
+    min-width: 190px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid transparent;
+    position: relative;
+  }
+  .gym-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--orange);
+    box-shadow: 0 12px 40px rgba(249,115,22,0.25);
+  }
+  .gym-card.clicked { animation: pulse-glow 0.6s ease; border-color: var(--orange); }
+  .gym-card .phrase {
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .gym-card .action {
+    font-size: 12px;
+    color: var(--orange);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .gym-card .card-icon { font-size: 28px; margin-bottom: 10px; }
+  #slide-1 .bottom-instruction {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===========================
+     SLIDE 2 — OBJECTIVE
+  =========================== */
+  #slide-2 .content {
+    position: relative; z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 70px 8% 70px;
+    gap: 22px;
+  }
+  #slide-2 .slide-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 800;
+    color: var(--white);
+    text-align: center;
+  }
+  .objective-card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 30px 40px;
+    max-width: 560px;
+    width: 100%;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.28);
+    text-align: center;
+  }
+  .objective-card .sub-label {
+    font-size: 13px;
+    color: #888;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .objective-card .obj-text {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.4;
+  }
+  .objective-card .obj-text .highlight { color: var(--orange); }
+  #slide-2 .self-check-q {
+    font-size: 16px;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  .self-check-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-selfcheck {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(255,255,255,0.15);
+    color: var(--white);
+    padding: 10px 26px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Sora', sans-serif;
+  }
+  .btn-selfcheck:hover { background: rgba(249,115,22,0.15); border-color: var(--orange); }
+  .repeat-prompt {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    color: var(--orange-soft);
+    letter-spacing: 0.06em;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  /* ===========================
+     SLIDE 3 — WARM-UP
+  =========================== */
+  #slide-3 .content {
+    position: relative; z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 65px 5% 70px;
+    gap: 14px;
+  }
+  #slide-3 .slide-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 800;
+    color: var(--white);
+  }
+  #slide-3 .slide-subtitle {
+    font-size: 15px;
+    color: var(--orange-soft);
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .warmup-reveal-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .reveal-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 220px;
+  }
+  .revealed-question {
+    background: var(--cream);
+    color: var(--navy);
+    border-radius: 14px;
+    padding: 14px 22px;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.22);
+    display: none;
+    animation: pop 0.3s ease;
+    min-width: 200px;
+  }
+  .revealed-question.show { display: block; }
+  .support-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .chip {
+    background: rgba(249,115,22,0.12);
+    border: 1px solid rgba(249,115,22,0.3);
+    color: var(--orange-soft);
+    padding: 6px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .chip:hover { background: rgba(249,115,22,0.22); animation: pulse-glow 0.5s ease; }
+  .model-answer {
+    background: rgba(255,255,255,0.06);
+    border-left: 3px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    padding: 14px 20px;
+    max-width: 400px;
+    display: none;
+    animation: pop 0.3s ease;
+  }
+  .model-answer.show { display: block; }
+  .model-answer p { font-size: 15px; color: var(--white); line-height: 1.7; font-style: italic; }
+  .breakout-card {
+    background: rgba(249,115,22,0.08);
+    border: 1.5px solid rgba(249,115,22,0.25);
+    border-radius: 16px;
+    padding: 16px 24px;
+    max-width: 480px;
+    width: 100%;
+  }
+  .breakout-card .bc-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--orange-soft);
+    margin-bottom: 8px;
+  }
+  .breakout-card ol { padding-left: 18px; }
+  .breakout-card li { font-size: 13px; color: var(--text-muted); line-height: 1.8; }
+  .after-breakout-reveal {
+    background: rgba(34,197,94,0.1);
+    border: 1px solid rgba(34,197,94,0.3);
+    border-radius: 12px;
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #86efac;
+    display: none;
+    animation: pop 0.3s ease;
+    text-align: center;
+    font-weight: 600;
+  }
+  .after-breakout-reveal.show { display: block; }
+
+  /* ===========================
+     SLIDE 4 — INPUT
+  =========================== */
+  #slide-4 .content {
+    position: relative; z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 65px 4% 70px;
+    gap: 12px;
+  }
+  #slide-4 .slide-title {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(24px, 3vw, 38px);
+    font-weight: 800;
+    color: var(--white);
+  }
+  #slide-4 .slide-subtitle {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-style: italic;
+  }
+  .dialogue-container {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    max-width: 800px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .character-col {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+    min-width: 280px;
+  }
+  .char-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Sora', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .avatar-ana { background: var(--orange); color: white; }
+  .avatar-carlos { background: #3b82f6; color: white; }
+  .char-name {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+  .speech-bubble {
+    background: var(--cream);
+    color: var(--navy);
+    border-radius: 16px;
+    padding: 14px 20px;
+    font-family: 'Sora', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    position: relative;
+    transition: all 0.3s;
+    cursor: default;
+  }
+  .speech-bubble.ana-bubble {
+    border-bottom-left-radius: 4px;
+  }
+  .speech-bubble.carlos-bubble {
+    background: #e0f2fe;
+    border-bottom-right-radius: 4px;
+  }
+  .speech-bubble.glow-active {
+    box-shadow: 0 0 0 3px var(--orange), 0 8px 30px rgba(249,115,22,0.3);
+    transform: scale(1.02);
+  }
+  .spacer-bubble { height: 10px; }
+  .dialogue-controls {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 4px;
+  }
+  .btn-dialogue {
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Sora', sans-serif;
+  }
+  .btn-dialogue:hover { background: rgba(249,115,22,0.15); border-color: var(--orange); }
+  .btn-dialogue.active-repeat { border-color: var(--orange); background: rgba(249,115,22,0.12); color: var(--orange-soft); }
+  .repeat-instruction {
+    font-size: 14px;
+    color: var(--orange-soft);
+    font-weight: 600;
+    display: none;
+    animation: fadeIn 0.4s ease;
+  }
+  .repeat-instruction.show { display: block; }
+  .comprehension-checks {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-check {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-muted);
+    padding: 7px 18px;
+    border-radius: 999px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-check:hover { background: rgba(255,255,255,0.1); color: white; }
+
+  /* ===== SCROLLBAR ===== */
+  .modal-box::-webkit-scrollbar { width: 6px; }
+  .modal-box::-webkit-scrollbar-track { background: rgba(255,255,255,0.04); }
+  .modal-box::-webkit-scrollbar-thumb { background: rgba(249,115,22,0.3); border-radius: 3px; }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 700px) {
+    .gym-cards { flex-direction: column; align-items: center; }
+    .warmup-reveal-row { flex-direction: column; }
+    .dialogue-container { flex-direction: column; }
+    .character-col { min-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================================================
+     SLIDE 0 — COVER
+================================================ -->
+<div id="slide-0" class="slide active">
+  <div class="bg-bokeh">
+    <div class="bokeh-circle bokeh-1"></div>
+    <div class="bokeh-circle bokeh-2"></div>
+    <div class="bokeh-circle bokeh-3"></div>
+  </div>
+
+  <div class="logo-badge anim-1">
+    <div class="logo-icon">OE</div>
+    <span class="logo-text">Organic English</span>
+  </div>
+
+  <div class="content">
+    <div class="eyebrow anim-2">✦ Online English School</div>
+    <div class="brand-name anim-3">ORGANIC<br><span>ENGLISH</span></div>
+    <div class="lesson-tag anim-4">A1.1 – Day 1</div>
+    <div class="lesson-title anim-5">Nice to meet you</div>
+    <div class="divider-line anim-5"></div>
+    <div class="tagline anim-6">Speak. Discover. Practice.</div>
+    <button class="btn-primary anim-7" onclick="goToSlide(1)">Start Lesson ▶</button>
+  </div>
+
+  <div class="bottom-controls">
+    <button class="btn-teacher" onclick="openTeacherNotes(0)">🧑‍🏫 Teacher Notes</button>
+  </div>
+</div>
+
+<!-- ================================================
+     SLIDE 1 — BRAIN GYM
+================================================ -->
+<div id="slide-1" class="slide">
+  <div class="bg-bokeh">
+    <div class="bokeh-circle bokeh-1"></div>
+    <div class="bokeh-circle bokeh-2"></div>
+  </div>
+
+  <div class="stage-label anim-1">🧠 1 Brain Gym / Activation</div>
+  <div class="logo-badge anim-1">
+    <div class="logo-icon">OE</div>
+    <span class="logo-text">Organic English</span>
+  </div>
+
+  <div class="content">
+    <div class="slide-title anim-2">Let's wake up your English! 🧠</div>
+    <div class="slide-subtitle anim-3">Stand up. Click. Repeat. Move.</div>
+
+    <div class="gym-cards anim-4">
+      <div class="gym-card" onclick="pulseCard(this)">
+        <div class="card-icon">👋</div>
+        <div class="phrase">Hi!</div>
+        <div class="action">Wave</div>
+      </div>
+      <div class="gym-card" onclick="pulseCard(this)">
+        <div class="card-icon">👤</div>
+        <div class="phrase">My name is ___</div>
+        <div class="action">Point to yourself</div>
+      </div>
+      <div class="gym-card" onclick="pulseCard(this)">
+        <div class="card-icon">❓</div>
+        <div class="phrase">What's your name?</div>
+        <div class="action">Point to a classmate</div>
+      </div>
+    </div>
+
+    <div class="bottom-instruction anim-5">Repeat and copy the gestures.</div>
+  </div>
+
+  <div class="timer-badge anim-6">⏱️ 1–2 min</div>
+  <div class="bottom-controls anim-7">
+    <button class="btn-teacher" onclick="openTeacherNotes(1)">🧑‍🏫 Teacher Notes</button>
+    <button class="btn-next" onclick="goToSlide(2)">Next: Objective ▶</button>
+  </div>
+</div>
+
+<!-- ================================================
+     SLIDE 2 — OBJECTIVE
+================================================ -->
+<div id="slide-2" class="slide">
+  <div class="bg-bokeh">
+    <div class="bokeh-circle bokeh-1"></div>
+    <div class="bokeh-circle bokeh-2"></div>
+  </div>
+
+  <div class="stage-label anim-1">🎯 2 Objective</div>
+  <div class="logo-badge anim-1">
+    <div class="logo-icon">OE</div>
+    <span class="logo-text">Organic English</span>
+  </div>
+
+  <div class="content">
+    <div class="slide-title anim-2">Today's Mission 🎯</div>
+
+    <div class="objective-card anim-3">
+      <div class="sub-label">Today you will be able to:</div>
+      <div class="obj-text">
+        <span class="highlight">Introduce yourself</span><br>
+        and ask <span class="highlight">someone's name.</span>
+      </div>
+    </div>
+
+    <div class="self-check-q anim-4">Can you introduce yourself in English?</div>
+
+    <div class="self-check-buttons anim-4">
+      <button class="btn-selfcheck" onclick="showSelfCheck('notyeta1')">Not yet</button>
+      <button class="btn-selfcheck" onclick="showSelfCheck('alittlea1')">A little</button>
+      <button class="btn-selfcheck" onclick="showSelfCheck('yesa1')">Yes</button>
+    </div>
+
+    <div class="repeat-prompt anim-5">🔁 Repeat: <strong>introduce yourself</strong></div>
+  </div>
+
+  <div class="timer-badge anim-6">⏱️ 1–2 min</div>
+  <div class="bottom-controls anim-7">
+    <button class="btn-teacher" onclick="openTeacherNotes(2)">🧑‍🏫 Teacher Notes</button>
+    <button class="btn-next" onclick="goToSlide(3)">Next: Warm-up ▶</button>
+  </div>
+</div>
+
+<!-- ================================================
+     SLIDE 3 — WARM-UP
+================================================ -->
+<div id="slide-3" class="slide">
+  <div class="bg-bokeh">
+    <div class="bokeh-circle bokeh-1"></div>
+    <div class="bokeh-circle bokeh-2"></div>
+  </div>
+
+  <div class="stage-label anim-1">💬 3 Warm-up</div>
+  <div class="logo-badge anim-1">
+    <div class="logo-icon">OE</div>
+    <span class="logo-text">Organic English</span>
+  </div>
+
+  <div class="content">
+    <div class="slide-title anim-2">Let's start! 💬</div>
+    <div class="slide-subtitle anim-3">Click. Think. Talk.</div>
+
+    <div class="warmup-reveal-row anim-3">
+      <div class="reveal-block">
+        <button class="btn-reveal" id="btnQ1" onclick="revealQ(1)">Reveal Question 1</button>
+        <div class="revealed-question" id="q1text">Do you speak English?</div>
+      </div>
+      <div class="reveal-block">
+        <button class="btn-reveal" id="btnQ2" onclick="revealQ(2)">Reveal Question 2</button>
+        <div class="revealed-question" id="q2text">Why do you want to learn English?</div>
+      </div>
+    </div>
+
+    <div class="support-chips anim-4">
+      <span class="chip">for work</span>
+      <span class="chip">for travel</span>
+      <span class="chip">for study</span>
+      <span class="chip">for fun</span>
+    </div>
+
+    <div style="text-align:center;" class="anim-4">
+      <button class="btn-reveal" onclick="revealModel()">Show model answer</button>
+      <div class="model-answer" id="modelAnswer">
+        <p>I speak a little English.<br>I want to learn English for work.</p>
+      </div>
+    </div>
+
+    <div class="breakout-card anim-5">
+      <div class="bc-title">Breakout Mission 🚪 — Talk with your partner.</div>
+      <ol>
+        <li>Ask both questions.</li>
+        <li>Answer with short phrases.</li>
+        <li>Listen to your partner.</li>
+      </ol>
+    </div>
+
+    <div style="text-align:center;" class="anim-5">
+      <button class="btn-reveal" onclick="revealAfterBreakout()">After breakout</button>
+      <div class="after-breakout-reveal" id="afterBreakout">What did your partner say?</div>
+    </div>
+  </div>
+
+  <div class="timer-badge anim-6">⏱️ 2–3 min</div>
+  <div class="bottom-controls anim-7">
+    <button class="btn-teacher" onclick="openTeacherNotes(3)">🧑‍🏫 Teacher Notes</button>
+    <button class="btn-next" onclick="goToSlide(4)">Next: Input ▶</button>
+  </div>
+</div>
+
+<!-- ================================================
+     SLIDE 4 — INPUT
+================================================ -->
+<div id="slide-4" class="slide">
+  <div class="bg-bokeh">
+    <div class="bokeh-circle bokeh-1"></div>
+    <div class="bokeh-circle bokeh-2"></div>
+  </div>
+
+  <div class="stage-label anim-1">👂 4 Input</div>
+  <div class="logo-badge anim-1">
+    <div class="logo-icon">OE</div>
+    <span class="logo-text">Organic English</span>
+  </div>
+
+  <div class="content">
+    <div class="slide-title anim-2">Listen and read 👂</div>
+    <div class="slide-subtitle anim-2">First, just listen.</div>
+
+    <div class="dialogue-container anim-3">
+      <!-- Ana column -->
+      <div class="character-col" style="align-items: flex-start;">
+        <div class="char-header">
+          <div class="avatar avatar-ana">A</div>
+          <div class="char-name">ANA</div>
+        </div>
+        <div class="speech-bubble ana-bubble" id="b1">Hi!</div>
+        <div class="spacer-bubble"></div>
+        <div class="speech-bubble ana-bubble" id="b3">I'm Ana. What's your name?</div>
+        <div class="spacer-bubble"></div>
+        <div class="speech-bubble ana-bubble" id="b5">Nice to meet you too!</div>
+      </div>
+
+      <!-- Carlos column -->
+      <div class="character-col" style="align-items: flex-end; text-align: right;">
+        <div class="char-header" style="justify-content: flex-end;">
+          <div class="char-name">CARLOS</div>
+          <div class="avatar avatar-carlos">C</div>
+        </div>
+        <div class="spacer-bubble" style="height:52px;"></div>
+        <div class="speech-bubble carlos-bubble" id="b2">Hello!</div>
+        <div class="spacer-bubble"></div>
+        <div class="speech-bubble carlos-bubble" id="b4">I'm Carlos. Nice to meet you!</div>
+      </div>
+    </div>
+
+    <div class="dialogue-controls anim-4">
+      <button class="btn-dialogue" onclick="playDialogue()">▶ Play dialogue</button>
+      <button class="btn-dialogue" id="btnRepeat" onclick="activateRepeat()">🔁 Repeat line by line</button>
+    </div>
+
+    <div class="repeat-instruction" id="repeatInstruction">Repeat after your teacher.</div>
+
+    <div class="comprehension-checks anim-4">
+      <button class="btn-check" onclick="showFeedback('Ana is a student in the class. She starts the conversation saying: Hi!')">Who is Ana?</button>
+      <button class="btn-check" onclick="showFeedback('Carlos is Ana\'s classmate. He responds: Hello! I\'m Carlos.')">Who is Carlos?</button>
+    </div>
+
+    <div style="font-size:13px; color:var(--text-muted);" class="anim-4">Listen. Then repeat.</div>
+  </div>
+
+  <div class="timer-badge anim-6">⏱️ 5–6 min</div>
+  <div class="bottom-controls anim-7">
+    <button class="btn-teacher" onclick="openTeacherNotes(4)">🧑‍🏫 Teacher Notes</button>
+    <button class="btn-next" style="background:#4b5563; box-shadow:none; cursor:default;">Next: Guided Discovery ▶</button>
+  </div>
+</div>
+
+<!-- ================================================
+     TEACHER NOTES MODAL
+================================================ -->
+<div class="modal-overlay" id="teacherModal" onclick="closeTeacherNotes(event)">
+  <div class="modal-box" id="teacherModalBox">
+    <button class="modal-close" onclick="closeTeacherNotesDirect()">✕</button>
+    <h2 id="tnTitle">🧑‍🏫 Teacher Notes</h2>
+    <div id="tnContent"></div>
+  </div>
+</div>
+
+<!-- FEEDBACK POPUP -->
+<div class="feedback-popup" id="feedbackPopup">
+  <p id="feedbackText"></p>
+  <button class="fp-close" onclick="closeFeedback()">OK</button>
+</div>
+
+<script>
+// ===== SLIDE NAVIGATION =====
+function goToSlide(n) {
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.getElementById('slide-' + n).classList.add('active');
+}
+
+// ===== CARD PULSE =====
+function pulseCard(el) {
+  el.classList.remove('clicked');
+  void el.offsetWidth;
+  el.classList.add('clicked');
+  setTimeout(() => el.classList.remove('clicked'), 700);
+}
+
+// ===== SELF CHECK SLIDE 2 =====
+const selfCheckMessages = {
+  notyeta1: "That's okay. Let's learn together. 😊",
+  alittlea1: "Great. You will practice more today. 💪",
+  yesa1: "Excellent! Help your classmates too. ⭐"
+};
+function showSelfCheck(key) {
+  showFeedback(selfCheckMessages[key]);
+}
+
+// ===== WARM-UP REVEALS =====
+function revealQ(n) {
+  const btn = document.getElementById('btnQ' + n);
+  const txt = document.getElementById('q' + n + 'text');
+  btn.classList.add('revealed');
+  btn.disabled = true;
+  txt.classList.add('show');
+}
+function revealModel() {
+  document.getElementById('modelAnswer').classList.add('show');
+}
+function revealAfterBreakout() {
+  document.getElementById('afterBreakout').classList.add('show');
+}
+
+// ===== INPUT SLIDE =====
+let bubbleIndex = 0;
+const bubbleIds = ['b1','b2','b3','b4','b5'];
+
+function playDialogue() {
+  bubbleIds.forEach(id => document.getElementById(id).classList.remove('glow-active'));
+  bubbleIndex = 0;
+  animateBubble();
+}
+function animateBubble() {
+  if (bubbleIndex >= bubbleIds.length) return;
+  const el = document.getElementById(bubbleIds[bubbleIndex]);
+  el.classList.add('glow-active');
+  bubbleIndex++;
+  setTimeout(() => {
+    el.classList.remove('glow-active');
+    setTimeout(animateBubble, 200);
+  }, 1200);
+}
+function activateRepeat() {
+  const btn = document.getElementById('btnRepeat');
+  btn.classList.toggle('active-repeat');
+  const inst = document.getElementById('repeatInstruction');
+  inst.classList.toggle('show');
+}
+
+// ===== FEEDBACK POPUP =====
+function showFeedback(msg) {
+  document.getElementById('feedbackText').textContent = msg;
+  document.getElementById('feedbackPopup').classList.add('show');
+}
+function closeFeedback() {
+  document.getElementById('feedbackPopup').classList.remove('show');
+}
+
+// ===== TEACHER NOTES DATA =====
+const teacherNotes = [
+  {
+    title: "🧑‍🏫 Teacher Notes – Cover / Lesson Landing Page",
+    fields: [
+      { label: "Stage", value: "Cover / Welcome" },
+      { label: "Timing", value: "⏱️ 30 seconds – 1 minute" },
+      { label: "What to do", value: "<ul><li>Welcome students warmly.</li><li>Say the lesson title.</li><li>Smile and create positive energy.</li><li>Click Start Lesson when ready.</li></ul>" },
+      { label: "Instructions for students", value: "<ul><li>Look at the screen.</li><li>Get ready to start.</li></ul>" },
+      { label: "What NOT to do", value: "<ul><li>Do not explain the whole class.</li><li>Do not teach language yet.</li><li>Do not spend too long here.</li></ul>" },
+      { label: "What to focus on", value: "Energy · Professional first impression · Student comfort" },
+      { label: "Pedagogical intention", value: "Start the lesson with clarity, warmth, and confidence." },
+      { label: "Key Improvement", value: "Use your voice and body language. The cover is not teaching content; it is setting the emotional tone." },
+      { label: "Critical Error", value: "Starting cold or silently. The first 30 seconds affect student confidence." },
+      { label: "Pro Tip", value: '"Welcome to Organic English. Today: Nice to meet you."' },
+      { label: "Final Checklist", value: "<ul><li>Students can see the screen.</li><li>Audio is working.</li><li>Energy feels positive.</li><li>Teacher is ready to begin.</li></ul>" }
+    ]
+  },
+  {
+    title: "🧑‍🏫 Teacher Notes – Brain Gym / Activation",
+    fields: [
+      { label: "Stage", value: "Brain Gym / Activation" },
+      { label: "Timing", value: "⏱️ 1–2 minutes MAX" },
+      { label: "What to do", value: "<ul><li>Ask students to stand up.</li><li>Click the first phrase: "Hi!" — Say it with energy and wave.</li><li>Students repeat and copy the gesture.</li><li>Click "My name is ___." — Point to yourself and have students repeat.</li><li>Click "What's your name?" — Gesture toward students and have them repeat.</li><li>Repeat the sequence 2–3 times with energy.</li></ul>" },
+      { label: "Instructions for students", value: "Stand up · Listen · Repeat · Copy the gestures." },
+      { label: "What NOT to do", value: "<ul><li>Do NOT explain grammar.</li><li>Do NOT translate.</li><li>Do NOT extend the activity.</li><li>Do NOT turn this into a pronunciation lecture.</li></ul>" },
+      { label: "What to focus on", value: "Energy · Participation · Voice activation · Reduced anxiety" },
+      { label: "Pedagogical intention", value: "Activate students physically and mentally. Students should begin speaking immediately in a simple, safe, low-pressure way." },
+      { label: "Key Improvement", value: "Model everything first. Students should copy, not think too much." },
+      { label: "Critical Error", value: "Making the activity too long or too serious. This must feel fast, simple, and fun." },
+      { label: "Pro Tip", value: "Repeat the phrases with variation: Whisper · Normal · Loud · Slow · Fast. This keeps attention high." },
+      { label: "Final Checklist", value: "<ul><li>All students participated.</li><li>Students spoke out loud.</li><li>Energy level increased.</li><li>No grammar explanation happened.</li></ul>" }
+    ]
+  },
+  {
+    title: "🧑‍🏫 Teacher Notes – Objective",
+    fields: [
+      { label: "Stage", value: "Objective" },
+      { label: "Timing", value: "⏱️ 1–2 minutes maximum" },
+      { label: "What to do", value: '<ul><li>Show the slide.</li><li>Read the objective out loud.</li><li>Say: "Today you will be able to introduce yourself and ask someone\'s name."</li><li>Ask: "Can you introduce yourself in English?"</li><li>Let students answer with a button, Zoom reaction, chat, or orally.</li><li>Ask students to repeat: "introduce yourself."</li><li>Move quickly to the warm-up.</li></ul>' },
+      { label: "Instructions for students", value: "Listen · Read the objective · Answer the self-check · Repeat: introduce yourself." },
+      { label: "What NOT to do", value: "<ul><li>Do NOT explain grammar.</li><li>Do NOT teach the phrases yet.</li><li>Do NOT spend more than 1–2 minutes here.</li><li>Do NOT fill the slide with text.</li></ul>" },
+      { label: "What to focus on", value: "Clear learning goal · Student attention · Early participation · Positive energy" },
+      { label: "Pedagogical intention", value: "Set a clear goal for the lesson and help students understand what they will achieve by the end of class." },
+      { label: "Key Improvement", value: '"Repeat after me: introduce yourself." — This activates immediate participation and reduces anxiety.' },
+      { label: "Critical Error", value: "Turning the objective slide into a grammar explanation. This slide is only to focus students, not to teach language." },
+      { label: "Pro Tip", value: '"At the end of class, you can say your name and ask another person\'s name."' },
+      { label: "Final Checklist", value: "<ul><li>Students saw the objective.</li><li>Students answered the self-check.</li><li>Students repeated at least one phrase.</li><li>No grammar explanation happened.</li><li>The teacher moved quickly.</li></ul>" }
+    ]
+  },
+  {
+    title: "🧑‍🏫 Teacher Notes – Warm-up",
+    fields: [
+      { label: "Stage", value: "Warm-up / Breakout Rooms" },
+      { label: "Timing", value: "⏱️ 6–8 minutes total: 1–2 min group · 2–3 min breakout · 2 min feedback" },
+      { label: "What to do", value: "<ul><li>Show the slide.</li><li>Click Reveal Question 1: "Do you speak English?" — Let 1–2 students answer quickly.</li><li>Click Reveal Question 2: "Why do you want to learn English?"</li><li>Show the support phrases: for work, for travel, for study, for fun.</li><li>Click Show model answer: "I speak a little English. I want to learn English for work."</li><li>Send students to breakout rooms in pairs.</li><li>Bring them back.</li><li>Click After breakout and ask: "What did your partner say?"</li></ul>" },
+      { label: "Instructions for students", value: "Talk with your partner · Ask both questions · Answer with short phrases · Listen to your partner." },
+      { label: "What NOT to do", value: "<ul><li>Do NOT correct every mistake.</li><li>Do NOT interrupt fluency.</li><li>Do NOT explain grammar.</li><li>Do NOT translate every word.</li><li>Do NOT talk more than students.</li></ul>" },
+      { label: "What to focus on", value: "Participation · Confidence · Relaxed speaking · Student anxiety level" },
+      { label: "Pedagogical intention", value: "Activate prior knowledge and help students start speaking immediately. Lowers anxiety and creates a communicative atmosphere." },
+      { label: "Key Improvement", value: "Before breakout rooms, always model one complete answer: 'I speak a little English. I want to learn English for work.'" },
+      { label: "Critical Error", value: "Sending students to breakout rooms without a model. This can create silence, confusion, or Spanish-only conversation." },
+      { label: "Pro Tip", value: 'Accept short A1 answers: "A little." / "For work." / "For travel." / "No, not much." The goal is participation, not perfect English.' },
+      { label: "Final Checklist", value: "<ul><li>Students answered at least one question.</li><li>Students heard a model answer.</li><li>Students spoke in breakout rooms.</li><li>The atmosphere feels relaxed.</li><li>Teacher collected 1–2 observations for later feedback.</li></ul>" }
+    ]
+  },
+  {
+    title: "🧑‍🏫 Teacher Notes – Input",
+    fields: [
+      { label: "Stage", value: "Input" },
+      { label: "Timing", value: "⏱️ 5–6 minutes total" },
+      { label: "What to do", value: '<ul><li>Show the scene. Tell students: "First, just listen."</li><li>Click or reveal the dialogue line by line.</li><li>Read the dialogue naturally with gestures and clear intonation.</li><li>Do not ask students to repeat yet.</li><li>After the first full listening, ask: "Who is Ana?" / "Who is Carlos?"</li><li>Accept simple answers or gestures.</li><li>Read the dialogue again.</li><li>Ask students to repeat line by line.</li><li>Optionally, invite two students to read Ana and Carlos.</li></ul>' },
+      { label: "Instructions for students", value: "Listen first · Look at the conversation · Repeat after the teacher · Do not worry about understanding every word." },
+      { label: "What NOT to do", value: '<ul><li>Do NOT explain grammar.</li><li>Do NOT translate line by line.</li><li>Do NOT explain "I\'m = I am."</li><li>Do NOT analyze sentence structure.</li><li>Do NOT skip repetition.</li></ul>' },
+      { label: "What to focus on", value: "Natural pronunciation · Rhythm · Intonation · General comprehension · Student confidence" },
+      { label: "Pedagogical intention", value: "Provide students with meaningful language in context before explaining anything. Students first hear how the language works naturally, then repeat it with support." },
+      { label: "Key Improvement", value: '"Who is Ana?" / "Who is Carlos?" — This activates comprehension and prevents mechanical repetition.' },
+      { label: "Critical Error", value: 'Explaining grammar here. If the teacher explains "I\'m = I am" at this stage, the inductive method breaks.' },
+      { label: "Pro Tip", value: "Use line-by-line animation: one line appears → teacher reads → students listen → later, students repeat → full conversation appears at the end." },
+      { label: "Final Checklist", value: "<ul><li>Students listened to the full dialogue.</li><li>Students identified Ana and Carlos.</li><li>Students repeated at least once.</li><li>Teacher did not explain grammar.</li><li>Students understand the general context.</li></ul>" }
+    ]
+  }
+];
+
+// ===== OPEN / CLOSE TEACHER NOTES =====
+function openTeacherNotes(slideNum) {
+  const data = teacherNotes[slideNum];
+  document.getElementById('tnTitle').textContent = data.title;
+  let html = '';
+  data.fields.forEach(f => {
+    html += `<div class="modal-field">
+      <div class="field-label">${f.label}</div>
+      <div class="field-value">${f.value}</div>
+    </div>`;
+  });
+  document.getElementById('tnContent').innerHTML = html;
+  document.getElementById('teacherModal').classList.add('open');
+}
+function closeTeacherNotes(e) {
+  if (e.target === document.getElementById('teacherModal')) {
+    document.getElementById('teacherModal').classList.remove('open');
+  }
+}
+function closeTeacherNotesDirect() {
+  document.getElementById('teacherModal').classList.remove('open');
+}
+</script>
+</body>
+</html>
